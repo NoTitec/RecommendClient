@@ -18,7 +18,7 @@ public class HelloApplication extends Application {
         //stage.setWidth(400);//윈도우 크기
         //stage.setHeight(300);
         stage.show();
-    }
+    } //jihwan commit
 
     public static void main(String[] args) {
         launch();
