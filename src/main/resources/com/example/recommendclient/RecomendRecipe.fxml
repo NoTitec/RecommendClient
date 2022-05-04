@@ -7,14 +7,14 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<SplitPane dividerPositions="0.8291457286432161" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="403.0" prefWidth="621.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.recommendclient.RecomendRecipeController">
+<SplitPane dividerPositions="0.8291457286432161" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="403.0" prefWidth="621.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.recommendclient.RecomendRecipeController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="519.0" prefWidth="833.0">
          <children>
 
             <Label fx:id="wetherrecommend2" layoutX="140.0" layoutY="277.0" text="날씨추천요리2" />
             <Label fx:id="seasonrecommend2" layoutX="413.0" layoutY="277.0" text="계절추천요리2" />
-            <Label fx:id="wetherrecommend1" layoutX="139.0" layoutY="118.0" text="날씨추천요리1" />
+            <Label fx:id="wetherrecommend1" layoutX="139.0" layoutY="118.0" text="날씨추천요리1 " />
             <Label fx:id="seasonrecommend1" layoutX="414.0" layoutY="118.0" text="계절추천요리1" />
              <ImageView fx:id="wetherImage2" fitHeight="86.0" fitWidth="152.0" layoutX="102.0" layoutY="20.0" pickOnBounds="true" preserveRatio="false">
                  <image>
