@@ -203,7 +203,7 @@ public class RecomendRecipeController implements Initializable {
             }
 
         }
-
+        pos=2;
         //wetherImage1.setImage(new Image("https://recipe1.ezmember.co.kr/cache/recipe/2022/02/16/8e34b759f6386912756c9a0f9d2255f91.jpg"));
     }
 }
