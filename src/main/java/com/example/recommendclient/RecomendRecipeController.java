@@ -105,7 +105,9 @@ public class RecomendRecipeController implements Initializable {
             e.printStackTrace();
         }
         int type=buf[0]; //타입
+        System.out.println(type);
         int code=buf[1]; //코드
+        System.out.println(code);
         pos=2;
         for(int i=0;i<4;i++){//전송받은 요리 4개 추출해 저장
             //1개요리 이름길이 추출
@@ -143,6 +145,7 @@ public class RecomendRecipeController implements Initializable {
             }
 
         }
+        pos=2;//pos변수 다시 2로 초기화
     }
     //----------------- 이밑은 이밴트 핸들러 메소드
     public void handleresetbtnAction(ActionEvent event){
