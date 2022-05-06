@@ -1,5 +1,6 @@
 package com.example.recommendclient;
 
+import java.io.IOException;
 import java.net.Socket;
 
 /**
@@ -20,5 +21,7 @@ public class ProgramInfo {
         ProgramInfo.socketConnect = socketConnect;
     }
 
-
+    public static void closeSocket() throws IOException {//연결종료하는 메소드
+        socket.close();
+    }
 }

@@ -13,7 +13,13 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("RecomendRecipe.fxml"));
         Scene scene = new Scene(fxmlLoader.load());//, 320, 240 fxmlLoader 에서 크기지정가능
         stage.setTitle("Hello!");
-        stage.setOnCloseRequest(event -> System.out.println("종료"));
+        stage.setOnCloseRequest(event -> {
+            try {
+                ProgramInfo.closeSocket();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
         stage.setScene(scene);
         //stage.setWidth(400);//윈도우 크기
         //stage.setHeight(300);

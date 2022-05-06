@@ -32,11 +32,11 @@ public class RecomendRecipeController implements Initializable {
     BufferedInputStream bis;
     OutputStream os;//socket outputstream저장
     BufferedOutputStream bos;
-    //프로토콜 객체 가져옴 ex) Protocol proto=new Protocol()
+    Protocol proto=new Protocol();//프로토콜 객체 가져옴 ex)
     byte [] buf;//읽은 패킷 저장할 바이트배열변수
     int pos=0;//buf 인덱싱 변수
-    byte [] sendData;//보낼데이터 저장할 바이트배열변수
-    int sendpos=0;//sendData 인덱싱 변수
+    byte [] sendData;//보낼패킷 데이터 저장할 바이트배열변수
+    int sendPos =0;//sendData 인덱싱 변수
     int rcvDataCount;// 수신데이터 개수저장할 변수
 
     String []recommendname= new String[4];//추천요리 이름저장배열
@@ -89,30 +89,39 @@ public class RecomendRecipeController implements Initializable {
         }
 
         //접속후 서버에게 요리목록 패킷요청
-        //ex proto=new Protocol(타입 코드전달하여 해당 패킷 생성)
-        //bos.write(proto.getPacket());
-        //bos.flush();
+        proto=new Protocol(0,0);
+
+        try {
+            bos.write(proto.getPacket());
+            bos.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         //요리목록패킷 받아서 사진과 이미지 변경 , 받는패킷의 목록순서 날씨음식1,2 계절음식 1,2
-        //bis.read(buf);
-        //int type=buf[0]; 타입
-        //int code=buf[1]; 코드
+        try {
+            System.out.println(bis.read(buf));//수신버퍼 읽기시도후 실제 읽은 바이트수 출력하고 buf배열에 읽은것 저장
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int type=buf[0]; //타입
+        int code=buf[1]; //코드
         pos=2;
         for(int i=0;i<4;i++){//전송받은 요리 4개 추출해 저장
             //1개요리 이름길이 추출
-            //int onerecipenamelength=proto.byteArrayToInt(Arrays.copyOfRange(buf,pos,pos+4));
+            int onerecipenamelength=proto.byteArrayToInt(Arrays.copyOfRange(buf,pos,pos+4));
             pos+=4;
             //1개요리 이름길이만큼 읽어서 추출후 string 변환하여 요리이름배열에저장
-            //byte[] name = Arrays.copyOfRange(buf, pos, pos+onerecipenamelength);//추출한길이만큼읽어 코드추출
-            //recommendname[i] = new String(name);//추출 이름 String 변환해 저장
-            //pos+=onerecipenamelength;
+            byte[] name = Arrays.copyOfRange(buf, pos, pos+onerecipenamelength);//추출한길이만큼읽어 코드추출
+            recommendname[i] = new String(name);//추출 이름 String 변환해 저장
+            pos+=onerecipenamelength;
             //1개요리 이미지 url 길이 추출
-            //int onerecipeurllength=proto.byteArrayToInt(Arrays.copyOfRange(buf,pos,pos+4));
+            int onerecipeurllength=proto.byteArrayToInt(Arrays.copyOfRange(buf,pos,pos+4));
             pos+=4;
             //1개요리 이미지 url길이만큼 읽어서 추출후 string 변환하여 요리이미지배열에 저장
-            //byte[] url = Arrays.copyOfRange(buf, pos, pos+onerecipeurllength);//추출한길이만큼읽어 코드추출
-            //Imageurl[i]= new String(url);//추출 word를  string으로 변환하여 저장
-            //pos+=onerecipenamelength;
+            byte[] url = Arrays.copyOfRange(buf, pos, pos+onerecipeurllength);//추출한길이만큼읽어 코드추출
+            Imageurl[i]= new String(url);//추출 word를  string으로 변환하여 저장
+            pos+=onerecipenamelength;
         }
 
         //받은 요리의 이름과 이미지 url이용해 ui 정보 변경
@@ -125,16 +134,73 @@ public class RecomendRecipeController implements Initializable {
         seasonrecommend2.setText(recommendname[3]);
         seasonImage2.setImage(new Image(Imageurl[3]));
 
+        //수신버퍼 읽을것 없을때까지 읽어서 버퍼비우기(1번째 통신이후 수신버퍼 읽을때 쓰레기값 방지위해)
+        while(true){
+            try {
+                if (bis.read()==-1) break;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
     //----------------- 이밑은 이밴트 핸들러 메소드
     public void handleresetbtnAction(ActionEvent event){
         System.out.println("새로고침버튼클릭");
         //서버에게 요리목록 패킷요청
-        //ex proto=new Protocol(타입 코드전달하여 해당 패킷 생성)
+        proto=new Protocol(0,0);
+
+        try {
+            bos.write(proto.getPacket());
+            bos.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         //요리목록패킷 받아서 사진과 이미지 변경 , 받는패킷의 목록순서 날씨음식1,2 계절음식 1,2
-
+        try {
+            System.out.println(bis.read(buf));//수신버퍼 읽기시도후 실제 읽은 바이트수 출력하고 buf배열에 읽은것 저장
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int type=buf[0]; //타입
+        int code=buf[1]; //코드
+        pos=2;
+        for(int i=0;i<4;i++){//전송받은 요리 4개 추출해 저장
+            //1개요리 이름길이 추출
+            int onerecipenamelength=proto.byteArrayToInt(Arrays.copyOfRange(buf,pos,pos+4));
+            pos+=4;
+            //1개요리 이름길이만큼 읽어서 추출후 string 변환하여 요리이름배열에저장
+            byte[] name = Arrays.copyOfRange(buf, pos, pos+onerecipenamelength);//추출한길이만큼읽어 코드추출
+            recommendname[i] = new String(name);//추출 이름 String 변환해 저장
+            pos+=onerecipenamelength;
+            //1개요리 이미지 url 길이 추출
+            int onerecipeurllength=proto.byteArrayToInt(Arrays.copyOfRange(buf,pos,pos+4));
+            pos+=4;
+            //1개요리 이미지 url길이만큼 읽어서 추출후 string 변환하여 요리이미지배열에 저장
+            byte[] url = Arrays.copyOfRange(buf, pos, pos+onerecipeurllength);//추출한길이만큼읽어 코드추출
+            Imageurl[i]= new String(url);//추출 word를  string으로 변환하여 저장
+            pos+=onerecipenamelength;
+        }
         //받은 요리의 이름과 이미지 url이용해 ui 정보 변경
-        wetherImage1.setImage(new Image("https://recipe1.ezmember.co.kr/cache/recipe/2022/02/16/8e34b759f6386912756c9a0f9d2255f91.jpg"));
+        wetherrecommend1.setText(recommendname[0]);
+        wetherImage1.setImage(new Image(Imageurl[0]));
+        wetherrecommend2.setText(recommendname[1]);
+        wetherImage2.setImage(new Image(Imageurl[1]));
+        seasonrecommend1.setText(recommendname[2]);
+        seasonImage1.setImage(new Image(Imageurl[2]));
+        seasonrecommend2.setText(recommendname[3]);
+        seasonImage2.setImage(new Image(Imageurl[3]));
+        //수신버퍼 읽을것 없을때까지 읽어서 버퍼비우기(1번째 통신이후 수신버퍼 읽을때 쓰레기값 방지위해)
+        while(true){
+            try {
+                if (bis.read()==-1) break;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        //wetherImage1.setImage(new Image("https://recipe1.ezmember.co.kr/cache/recipe/2022/02/16/8e34b759f6386912756c9a0f9d2255f91.jpg"));
     }
 }
