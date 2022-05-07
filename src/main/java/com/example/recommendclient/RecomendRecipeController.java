@@ -3,11 +3,17 @@ package com.example.recommendclient;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.InetSocketAddress;
@@ -18,6 +24,7 @@ import java.util.ResourceBundle;
 
 public class RecomendRecipeController implements Initializable {
     //@FXML다음 initialize실행
+    @FXML public SplitPane splitpane;
     @FXML public Button resetbutton;
     @FXML public ImageView wetherImage2;
     @FXML public Label wetherrecommend2;
@@ -59,6 +66,11 @@ public class RecomendRecipeController implements Initializable {
         resetbutton.setOnAction(event -> handleresetbtnAction(event));
         방법3
         fxml에서 속성으로 onAction정의*/
+
+        wetherImage1.setOnMouseClicked(event -> handlerSetWetherImage1Action(event));
+        wetherImage2.setOnMouseClicked(event -> handlerSetWetherImage2Action(event));
+        seasonImage1.setOnMouseClicked(event -> handlerSetSeasonImage1Action(event));
+        seasonImage2.setOnMouseClicked(event -> handlerSetSeasonImage2Action(event));
 
         if(!ProgramInfo.socketConnect){//소켓이 아직 연결안되어있으면 소켓 연결
             final String server_Ip="127.0.0.1";//루프백 주소 후에 실제 인터넷연결시 이걸 변경
@@ -208,11 +220,62 @@ public class RecomendRecipeController implements Initializable {
 
                 }
                 pos=2;
-                //wetherImage1.setImage(new Image("https://recipe1.ezmember.co.kr/cache/recipe/2022/02/16/8e34b759f6386912756c9a0f9d2255f91.jpg"));
+
             }
 
         };
         thread.setDaemon(true);
         thread.start();
+    }
+    public void handlerSetWetherImage1Action(MouseEvent event){//이미지 선택시 선택이미지 창으로 이동
+        try{
+            FXMLLoader loader=new FXMLLoader();
+            loader.setLocation(getClass().getResource("SelectRecipeInfo.fxml"));
+            Parent selectrecipe= loader.load();
+
+            Scene scene=new Scene(selectrecipe);
+
+            SelectRecipeInfoController sController=loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
+            sController.initData(wetherrecommend1.getText());
+            Stage stage=(Stage)splitpane.getScene().getWindow();
+            stage.setScene(scene);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //wetherImage1.setImage(new Image("https://recipe1.ezmember.co.kr/cache/recipe/2022/02/16/8e34b759f6386912756c9a0f9d2255f91.jpg"));
+    }
+    public void handlerSetWetherImage2Action(MouseEvent event){
+        try{
+            Parent selectrecipe= FXMLLoader.load(getClass().getResource("SelectRecipeInfo.fxml"));
+            Scene scene=new Scene(selectrecipe);
+            Stage stage=(Stage)splitpane.getScene().getWindow();
+            stage.setScene(scene);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public void handlerSetSeasonImage1Action(MouseEvent event){
+        try{
+            Parent selectrecipe= FXMLLoader.load(getClass().getResource("SelectRecipeInfo.fxml"));
+            Scene scene=new Scene(selectrecipe);
+            Stage stage=(Stage)splitpane.getScene().getWindow();
+            stage.setScene(scene);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public void handlerSetSeasonImage2Action(MouseEvent event){
+        try{
+            Parent selectrecipe= FXMLLoader.load(getClass().getResource("SelectRecipeInfo.fxml"));
+            Scene scene=new Scene(selectrecipe);
+            Stage stage=(Stage)splitpane.getScene().getWindow();
+            stage.setScene(scene);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
