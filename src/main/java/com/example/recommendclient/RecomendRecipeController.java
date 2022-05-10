@@ -131,7 +131,11 @@ public class RecomendRecipeController implements Initializable {
             pos+=4;
             //1개요리 이름길이만큼 읽어서 추출후 string 변환하여 요리이름배열에저장
             byte[] name = Arrays.copyOfRange(buf, pos, pos+onerecipenamelength);//추출한길이만큼읽어 코드추출
-            recommendname[i] = new String(name);//추출 이름 String 변환해 저장
+            try {
+                recommendname[i] = new String(name,"UTF-8");//추출 이름 String 변환해 저장
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
             pos+=onerecipenamelength;
             //1개요리 이미지 url 길이 추출
             int onerecipeurllength=proto.byteArrayToInt(Arrays.copyOfRange(buf,pos,pos+4));
@@ -196,7 +200,12 @@ public class RecomendRecipeController implements Initializable {
                     pos+=4;
                     //1개요리 이름길이만큼 읽어서 추출후 string 변환하여 요리이름배열에저장
                     byte[] name = Arrays.copyOfRange(buf, pos, pos+onerecipenamelength);//추출한길이만큼읽어 코드추출
-                    recommendname[i] = new String(name);//추출 이름 String 변환해 저장
+                    try {
+                        recommendname[i] = new String(name,"UTF-8");//추출 이름 String 변환해 저장
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println(recommendname[i]);
                     pos+=onerecipenamelength;
                     //1개요리 이미지 url 길이 추출
                     int onerecipeurllength=proto.byteArrayToInt(Arrays.copyOfRange(buf,pos,pos+4));
@@ -204,6 +213,7 @@ public class RecomendRecipeController implements Initializable {
                     //1개요리 이미지 url길이만큼 읽어서 추출후 string 변환하여 요리이미지배열에 저장
                     byte[] url = Arrays.copyOfRange(buf, pos, pos+onerecipeurllength);//추출한길이만큼읽어 코드추출
                     Imageurl[i]= new String(url);//추출 word를  string으로 변환하여 저장
+                    System.out.println(Imageurl[i]);
                     pos+=onerecipeurllength;
                 }
                 //받은 요리의 이름과 이미지 url이용해 ui 정보 변경
@@ -233,7 +243,7 @@ public class RecomendRecipeController implements Initializable {
         thread.start();
     }
     public void handlerSetWetherImage1Action(MouseEvent event){//이미지 선택시 선택이미지 창으로 이동
-        /*try{
+        try{
             FXMLLoader loader=new FXMLLoader();
             loader.setLocation(getClass().getResource("SelectRecipeInfo.fxml"));
             Parent selectrecipe= loader.load();
@@ -241,19 +251,25 @@ public class RecomendRecipeController implements Initializable {
             Scene scene=new Scene(selectrecipe);
 
             SelectRecipeInfoController sController=loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
-            sController.initData(wetherrecommend1.getText());
+            sController.initData(wetherrecommend1.getText()+"Link");
             Stage stage=(Stage)splitpane.getScene().getWindow();
             stage.setScene(scene);
 
         }catch (Exception e){
             e.printStackTrace();
-        }*/
-        wetherImage1.setImage(new Image("https://recipe1.ezmember.co.kr/cache/recipe/2022/02/16/8e34b759f6386912756c9a0f9d2255f91.jpg"));
+        }
+        //wetherImage1.setImage(new Image("https://recipe1.ezmember.co.kr/cache/recipe/2022/02/16/8e34b759f6386912756c9a0f9d2255f91.jpg"));
     }
     public void handlerSetWetherImage2Action(MouseEvent event){
         try{
-            Parent selectrecipe= FXMLLoader.load(getClass().getResource("SelectRecipeInfo.fxml"));
+            FXMLLoader loader=new FXMLLoader();
+            loader.setLocation(getClass().getResource("SelectRecipeInfo.fxml"));
+            Parent selectrecipe= loader.load();
+
             Scene scene=new Scene(selectrecipe);
+
+            SelectRecipeInfoController sController=loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
+            sController.initData(wetherrecommend1.getText()+"Link");
             Stage stage=(Stage)splitpane.getScene().getWindow();
             stage.setScene(scene);
 
@@ -263,19 +279,30 @@ public class RecomendRecipeController implements Initializable {
     }
     public void handlerSetSeasonImage1Action(MouseEvent event){
         try{
-            Parent selectrecipe= FXMLLoader.load(getClass().getResource("SelectRecipeInfo.fxml"));
+            FXMLLoader loader=new FXMLLoader();
+            loader.setLocation(getClass().getResource("SelectRecipeInfo.fxml"));
+            Parent selectrecipe= loader.load();
+
             Scene scene=new Scene(selectrecipe);
+
+            SelectRecipeInfoController sController=loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
+            sController.initData(wetherrecommend1.getText()+"Link");
             Stage stage=(Stage)splitpane.getScene().getWindow();
             stage.setScene(scene);
-
         }catch (Exception e){
             e.printStackTrace();
         }
     }
     public void handlerSetSeasonImage2Action(MouseEvent event){
         try{
-            Parent selectrecipe= FXMLLoader.load(getClass().getResource("SelectRecipeInfo.fxml"));
+            FXMLLoader loader=new FXMLLoader();
+            loader.setLocation(getClass().getResource("SelectRecipeInfo.fxml"));
+            Parent selectrecipe= loader.load();
+
             Scene scene=new Scene(selectrecipe);
+
+            SelectRecipeInfoController sController=loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
+            sController.initData(wetherrecommend1.getText()+"Link");
             Stage stage=(Stage)splitpane.getScene().getWindow();
             stage.setScene(scene);
 
