@@ -21,6 +21,8 @@ import java.net.Socket;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
+import static com.example.recommendclient.Protocol.*; //상수 사용을 위한 import
+
 
 public class RecomendRecipeController implements Initializable {
     //@FXML다음 initialize실행
@@ -102,7 +104,8 @@ public class RecomendRecipeController implements Initializable {
         }
 
         //접속후 서버에게 요리목록 패킷요청
-        proto=new Protocol(0,0);
+        proto=new Protocol(TYPE_REQUEST,CODE_RECOMMENDFOOD); //가독성 개선함
+
 
         try {
             bos.write(proto.getPacket());
@@ -114,7 +117,7 @@ public class RecomendRecipeController implements Initializable {
         //요리목록패킷 받아서 사진과 이미지 변경 , 받는패킷의 목록순서 날씨음식1,2 계절음식 1,2
         try {
 
-            buf = proto.getPacket(1,0);
+            buf = proto.getPacket(TYPE_RESPONSE,CODE_RECOMMENDFOOD); //가독성 개선함
 
             bis.read(buf);//수신버퍼 읽기시도후 실제 읽은 바이트수 출력하고 buf배열에 읽은것 저장
         } catch (IOException e) {
@@ -170,6 +173,9 @@ public class RecomendRecipeController implements Initializable {
     }
     //----------------- 이밑은 이밴트 핸들러 메소드
     public void handleresetbtnAction(ActionEvent event){
+
+        //현재 문제점 : 10번쯤 천천히 클릭하면  1분정도 먹통되는 현상 빈번하게 발생함. (완전히 멈추진 않음)
+
         Thread thread=new Thread(){//버튼 눌렀을때 통신과 ui변경담당 스레드
             @Override
             public void run() {
