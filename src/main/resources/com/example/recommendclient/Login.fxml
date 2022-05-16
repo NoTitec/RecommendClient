@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="loginAnchorPane" prefHeight="293.0" prefWidth="428.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.recommendclient.LoginController">
+
+    <GridPane layoutX="52.0" layoutY="117.0" prefWidth="336.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="72.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="128.0" minWidth="10.0" prefWidth="128.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="30.0" minHeight="4.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+        <children>
+            <Label text="아이디">
+                <padding>
+                    <Insets left="10.0" />
+                </padding>
+            </Label>
+            <Label text="비밀번호" GridPane.rowIndex="1">
+                <padding>
+                    <Insets left="10.0" />
+                </padding>
+            </Label>
+            <TextField fx:id="IDField" GridPane.columnIndex="1" />
+            <FlowPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowSpan="2">
+                <children>
+                    <Button fx:id="loginButton" mnemonicParsing="false" prefHeight="59.0" prefWidth="99.0" text="로그인" />
+                </children>
+            </FlowPane>
+         <PasswordField fx:id="PWField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        </children>
+    </GridPane>
+    <Label alignment="CENTER" layoutX="40.0" layoutY="34.0" prefHeight="50.0" prefWidth="366.0" text="날씨 요리추천 프로그램">
+        <font>
+            <Font size="29.0" />
+        </font>
+    </Label>
+
+   <Button fx:id="signupButton" layoutX="167.0" layoutY="232.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="106.0" text="회원가입" />
+   <Label alignment="CENTER" layoutX="15.0" layoutY="187.0" prefHeight="26.0" prefWidth="411.0" text="아이디, 비밀번호는 30글자 이하로 해주세요" />
+
+
+
+</AnchorPane>

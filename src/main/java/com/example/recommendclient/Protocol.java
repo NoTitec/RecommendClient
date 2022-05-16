@@ -4,15 +4,20 @@ public class Protocol {
     //Type
     public static final int TYPE_REQUEST = 0;
     public static final int TYPE_RESPONSE = 1;
+    public static final int TYPE_RESPONSE_ERROR = 2; //무언가 실패 했을 때 보냄 (필요할때만 사용하기)
 
     //Code
     public static final int CODE_RECOMMENDFOOD = 0;
+    public static final int CODE_LOGIN = 1;
+    public static final int CODE_SIGNUP = 2;
 
     //Protocol Length
     public static final int LEN_PROTOCOL_TYPE = 1;
     public static final int LEN_PROTOCOL_CODE = 1;
-    public static final int LEN_PROTOCOL_BODYLEN = 4;
-    public static final int LEN_BODY = 3000;
+    public static final int LEN_PROTOCOL_BODY = 3000;
+
+    // 중요!!! *****헤더에 길이정보를 저장하는 구 방식에서 바디에 길이정보를 같이 저장하는 신 방식으로 변경함.******
+    // 헤더에는 TYPE과 CODE만 저장함
 
     protected int protocolType;
     protected int protocolCode;
@@ -38,24 +43,61 @@ public class Protocol {
                     switch (protocolType){
 
                         case TYPE_REQUEST:
-                            packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE + LEN_PROTOCOL_BODYLEN]; // 지금은 위치 정보 안보낸다고 가정
+                            packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE]; // 지금은 위치 정보 안보낸다고 가정
                             break;
 
                         case TYPE_RESPONSE:
-                            packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE + LEN_PROTOCOL_BODYLEN + LEN_BODY];
+                            packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE + LEN_PROTOCOL_BODY];
                             break;
 
                     }
 
 
+                    break;
 
+                case CODE_LOGIN:
 
+                    switch (protocolType){
+
+                        case TYPE_REQUEST:
+                            packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE + LEN_PROTOCOL_BODY];
+                            break;
+
+                        case TYPE_RESPONSE: //응답 (로그인 성공)
+                            packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE];
+                            break;
+
+                        case TYPE_RESPONSE_ERROR: //응답 (로그인 실패(없는계정))
+                            packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE];
+                            break;
+                    }
+
+                    break;
+                    
+                case CODE_SIGNUP:
+                    
+                    switch (protocolType){
+
+                        case TYPE_REQUEST:
+                            packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE + LEN_PROTOCOL_BODY];
+                            break;
+
+                        case TYPE_RESPONSE: //응답 (회원가입 성공)
+                            packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE];
+                            break;
+
+                        case TYPE_RESPONSE_ERROR: //응답 (회원가입 실패 (중복아이디 존재))
+                            packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE];
+                            break;
+                            
+                    }
+                    break;
 
             }
 
 
         packet[0] = (byte)protocolType;
-        packet[LEN_PROTOCOL_TYPE] = (byte)protocolType;
+        packet[1] = (byte)protocolCode;
         return packet;
 
     }
@@ -90,21 +132,17 @@ public class Protocol {
         this.protocolType = protocolType;
         this.protocolCode = protocolCode;
 
-        byte tmp[] = new byte[4];
-        System.arraycopy(buf, 2,tmp,0,4);
-        this.protocolBodyLen = byteArrayToInt(tmp);
-
         System.arraycopy(buf,0,packet,0,packet.length);
 
     }
 
     public String getData(){ //데이터를 String으로 반환합니다.
-        return new String(packet, LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE + LEN_PROTOCOL_BODYLEN, protocolBodyLen).trim();
+        return new String(packet, LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE, protocolBodyLen).trim();
     }
 
     public byte[] getByteData(){ //데이터를 byte배열로 반환합니다.
         byte[] tmp = new byte[protocolBodyLen];
-        System.arraycopy(packet, LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE + LEN_PROTOCOL_BODYLEN, tmp, 0, protocolBodyLen);
+        System.arraycopy(packet, LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE, tmp, 0, protocolBodyLen);
         return tmp;
     }
 
@@ -114,16 +152,14 @@ public class Protocol {
         protocolBodyLen = data.length();
         tmp = intToByteArray(protocolBodyLen);
 
-        System.arraycopy(tmp, 0, packet, LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE, LEN_PROTOCOL_BODYLEN);
-        System.arraycopy(data.trim().getBytes(), 0, packet, LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE + LEN_PROTOCOL_BODYLEN, data.trim().getBytes().length);
+        System.arraycopy(data.trim().getBytes(), 0, packet, LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE, data.trim().getBytes().length);
     }
 
     public void setByteData(byte[] data, int size){
 
         protocolBodyLen = size;
         byte[] tmp = intToByteArray(size);
-        System.arraycopy(tmp, 0, packet, LEN_PROTOCOL_TYPE+LEN_PROTOCOL_CODE, LEN_PROTOCOL_BODYLEN);
-        System.arraycopy(data, 0, packet, LEN_PROTOCOL_TYPE+LEN_PROTOCOL_CODE+LEN_PROTOCOL_BODYLEN, size);
+        System.arraycopy(data, 0, packet, LEN_PROTOCOL_TYPE+LEN_PROTOCOL_CODE, size);
 
     }
 

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="signUpAnchorPane" prefHeight="293.0" prefWidth="439.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.recommendclient.SignUpController">
+
+    <GridPane layoutX="110.0" layoutY="117.0" prefHeight="60.0" prefWidth="220.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="72.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="128.0" minWidth="10.0" prefWidth="128.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="30.0" minHeight="4.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+        <children>
+            <Label text="아이디">
+                <padding>
+                    <Insets left="10.0" />
+                </padding>
+            </Label>
+            <Label text="비밀번호" GridPane.rowIndex="1">
+                <padding>
+                    <Insets left="10.0" />
+                </padding>
+            </Label>
+            <TextField fx:id="IDField" GridPane.columnIndex="1" />
+         <TextField fx:id="PWField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        </children>
+    </GridPane>
+    <Label alignment="CENTER" layoutX="130.0" layoutY="28.0" prefHeight="50.0" prefWidth="179.0" text="회원 가입">
+        <font>
+            <Font size="35.0" />
+        </font>
+    </Label>
+    <Button fx:id="signupButton" layoutX="167.0" layoutY="219.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="106.0" text="가입 신청" />
+   <Button fx:id="backButton" layoutX="354.0" layoutY="237.0" minWidth="50.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" text="뒤로가기" />
+
+
+</AnchorPane>
