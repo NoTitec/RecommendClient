@@ -36,6 +36,7 @@ public class RecomendRecipeController implements Initializable {
     @FXML public Label wetherrecommend1;
     @FXML public ImageView seasonImage1;
     @FXML public Label seasonrecommend1;
+    @FXML public Button wetherrecommend1youtubepopup;
 
     Socket socket;//이컨트롤러가쓸 socket
     InputStream is;//socket inputstream저장
@@ -248,18 +249,21 @@ public class RecomendRecipeController implements Initializable {
         thread.setDaemon(true);
         thread.start();
     }
+    public void handlewether1YoutubebtnAction(ActionEvent event){//youtube영상 popup창
+
+    }
     public void handlerSetWetherImage1Action(MouseEvent event){//이미지 선택시 선택이미지 창으로 이동
         try{
             FXMLLoader loader=new FXMLLoader();
             loader.setLocation(getClass().getResource("SelectRecipeInfo.fxml"));
-            Parent selectrecipe= loader.load();
-
+            Stage stage=new Stage();
+            Parent selectrecipe=loader.load();
             Scene scene=new Scene(selectrecipe);
-
             SelectRecipeInfoController sController=loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
             sController.initData(wetherrecommend1.getText()+"Link");
-            Stage stage=(Stage)splitpane.getScene().getWindow();
             stage.setScene(scene);
+            stage.showAndWait();
+
 
         }catch (Exception e){
             e.printStackTrace();
@@ -270,14 +274,13 @@ public class RecomendRecipeController implements Initializable {
         try{
             FXMLLoader loader=new FXMLLoader();
             loader.setLocation(getClass().getResource("SelectRecipeInfo.fxml"));
-            Parent selectrecipe= loader.load();
-
+            Stage stage=new Stage();
+            Parent selectrecipe=loader.load();
             Scene scene=new Scene(selectrecipe);
-
             SelectRecipeInfoController sController=loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
-            sController.initData(wetherrecommend1.getText()+"Link");
-            Stage stage=(Stage)splitpane.getScene().getWindow();
+            sController.initData(wetherrecommend2.getText()+"Link");
             stage.setScene(scene);
+            stage.showAndWait();
 
         }catch (Exception e){
             e.printStackTrace();
@@ -287,14 +290,13 @@ public class RecomendRecipeController implements Initializable {
         try{
             FXMLLoader loader=new FXMLLoader();
             loader.setLocation(getClass().getResource("SelectRecipeInfo.fxml"));
-            Parent selectrecipe= loader.load();
-
+            Stage stage=new Stage();
+            Parent selectrecipe=loader.load();
             Scene scene=new Scene(selectrecipe);
-
             SelectRecipeInfoController sController=loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
-            sController.initData(wetherrecommend1.getText()+"Link");
-            Stage stage=(Stage)splitpane.getScene().getWindow();
+            sController.initData(seasonrecommend1.getText()+"Link");
             stage.setScene(scene);
+            stage.showAndWait();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -303,14 +305,14 @@ public class RecomendRecipeController implements Initializable {
         try{
             FXMLLoader loader=new FXMLLoader();
             loader.setLocation(getClass().getResource("SelectRecipeInfo.fxml"));
-            Parent selectrecipe= loader.load();
-
+            Stage stage=new Stage();
+            //Stage stage=(Stage)splitpane.getScene().getWindow(); 그냥 빈 new Window 는 wait 와 hide가능한데 특정 fxml 루트컨테이너에 맞춘 stage는 wait메소드호출시 에러
+            Parent selectrecipe=loader.load();
             Scene scene=new Scene(selectrecipe);
-
             SelectRecipeInfoController sController=loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
-            sController.initData(wetherrecommend1.getText()+"Link");
-            Stage stage=(Stage)splitpane.getScene().getWindow();
+            sController.initData(seasonrecommend2.getText()+"Link");
             stage.setScene(scene);
+            stage.showAndWait();
 
         }catch (Exception e){
             e.printStackTrace();

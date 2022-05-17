@@ -44,7 +44,7 @@
                               <Insets />
                            </HBox.margin>
                         </Button>
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="뒤로가기" HBox.hgrow="ALWAYS">
+                        <Button fx:id="backButton" onAction="#handleBackbtnClicked" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="뒤로가기" HBox.hgrow="ALWAYS">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
