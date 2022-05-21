@@ -18,10 +18,6 @@ ext {
 sourceCompatibility = '11'
 targetCompatibility = '11'
 
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
-}
-
 application {
     mainModule = 'com.example.recommendclient'
     mainClass = 'com.example.recommendclient.HelloApplication'
@@ -33,7 +29,7 @@ javafx {
 }
 
 dependencies {
-
+    implementation('org.json:json:20190722')
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }

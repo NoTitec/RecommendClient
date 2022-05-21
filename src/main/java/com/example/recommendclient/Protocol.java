@@ -10,6 +10,7 @@ public class Protocol {
     public static final int CODE_RECOMMENDFOOD = 0;
     public static final int CODE_LOGIN = 1;
     public static final int CODE_SIGNUP = 2;
+    public static final int CODE_RESET_RECOMMENDFOOD=3;// 최초 code_recommendfood일 때 위도경도보내고 이후 새로고침에는 위도경도를 서버가 저장하므로 이코드로 새로운 요리 요청
 
     //Protocol Length
     public static final int LEN_PROTOCOL_TYPE = 1;
@@ -34,16 +35,16 @@ public class Protocol {
         getPacket(protocolType, protocolCode);
     }
 
-    public byte[] getPacket(int protocolType, int protocolCode){
+    public byte[] getPacket(int protocolType, int protocolCode){//type ,code순으로 보내는데 판단을 왜 코드,타입순으로하는지 모르겠음 가독성 저하
 
             switch (protocolCode){
 
-                case CODE_RECOMMENDFOOD:
+                case CODE_RECOMMENDFOOD://code가 추천코드인경우
 
                     switch (protocolType){
 
                         case TYPE_REQUEST:
-                            packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE]; // 지금은 위치 정보 안보낸다고 가정
+                            packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE + LEN_PROTOCOL_BODY]; // 지금은 위치 정보 안보낸다고 가정
                             break;
 
                         case TYPE_RESPONSE:
@@ -55,6 +56,14 @@ public class Protocol {
 
                     break;
 
+                case CODE_RESET_RECOMMENDFOOD:// code 가 새로운 추천인경우
+
+                    switch (protocolType){
+                        case TYPE_REQUEST:
+                            packet=new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE];
+                            break;
+                    }
+
                 case CODE_LOGIN:
 
                     switch (protocolType){
@@ -64,7 +73,7 @@ public class Protocol {
                             break;
 
                         case TYPE_RESPONSE: //응답 (로그인 성공)
-                            packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE];
+                            packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE + LEN_PROTOCOL_BODY];
                             break;
 
                         case TYPE_RESPONSE_ERROR: //응답 (로그인 실패(없는계정))
@@ -157,8 +166,8 @@ public class Protocol {
 
     public void setByteData(byte[] data, int size){
 
-        protocolBodyLen = size;
-        byte[] tmp = intToByteArray(size);
+        // = size; 이 두 줄은 왜있는것?
+        //byte[] tmp = intToByteArray(size);
         System.arraycopy(data, 0, packet, LEN_PROTOCOL_TYPE+LEN_PROTOCOL_CODE, size);
 
     }

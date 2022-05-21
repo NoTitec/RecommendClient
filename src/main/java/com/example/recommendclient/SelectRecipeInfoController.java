@@ -28,16 +28,13 @@ public class SelectRecipeInfoController implements Initializable {
     @FXML
     private Button backButton;
 
-    private WebEngine engine;
     public void initData(String name){
         selectedRecipeName=name;
+        System.out.println(selectedRecipeName);
         link.setText(selectedRecipeName);
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        engine=youtubewebview.getEngine();
-        engine.load("https://www.youtube.com/embed/N1phCu00GWU");
-
 
     }
     //_________________________이밑은 핸들러 메소드

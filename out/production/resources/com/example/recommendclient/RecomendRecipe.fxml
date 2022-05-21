@@ -33,6 +33,7 @@
                     <Image url="https://recipe1.ezmember.co.kr/cache/recipe/2022/02/17/1f40ef46386de280a5d80601d0d39ae01.jpg" />
                 </image>
             </ImageView>
+            <Button fx:id="wetherrecommend1youtubepopup" onAction="#handlewether1YoutubebtnAction" layoutX="144.0" layoutY="143.0" mnemonicParsing="false" text="유튜브영상" />
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
          <children>

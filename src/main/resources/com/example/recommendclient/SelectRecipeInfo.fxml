@@ -3,33 +3,38 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.web.*?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.recommendclient.SelectRecipeInfoController">
    <children>
-      <WebView fx:id="youtubewebview" prefHeight="302.0" prefWidth="700.0" />
-      <Label text="요리순서" />
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox prefHeight="277.0" prefWidth="700.0">
          <children>
-            <ListView prefHeight="74.0" prefWidth="282.0" />
-            <Label fx:id="link" text="선택된 재료 링크">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </Label>
+            <Button mnemonicParsing="false" text="Button" />
+            <Pane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="86.0" layoutY="7.0" text="Label" />
+               </children>
+            </Pane>
+
+            <Button mnemonicParsing="false" text="Button" />
+            <VBox prefHeight="277.0" prefWidth="314.0">
+               <children>
+                  <ListView prefHeight="249.0" prefWidth="314.0" />
+                  <Label fx:id="link" text="Label" />
+               </children>
+            </VBox>
          </children>
       </HBox>
-      <HBox prefHeight="183.0" prefWidth="600.0">
+      <HBox prefHeight="325.0" prefWidth="700.0">
          <children>
-            <HBox prefHeight="151.0" prefWidth="336.0">
+            <HBox prefHeight="221.0" prefWidth="332.0">
                <children>
-                  <ListView prefHeight="200.0" prefWidth="200.0" />
+                  <ListView prefHeight="234.0" prefWidth="198.0" />
                   <AnchorPane prefHeight="151.0" prefWidth="141.0">
                      <children>
-                        <Button layoutX="35.0" layoutY="98.0" mnemonicParsing="false" text="싫어요" />
-                        <Button layoutX="35.0" layoutY="61.0" mnemonicParsing="false" text="좋아요" />
-                        <Label layoutX="5.0" layoutY="18.0" text="좋아요수" />
-                        <Label layoutX="73.0" layoutY="18.0" text="싫어요수" />
+                        <Button layoutX="71.0" layoutY="260.0" mnemonicParsing="false" text="싫어요" />
+                        <Button layoutX="14.0" layoutY="260.0" mnemonicParsing="false" text="좋아요" />
+                        <Label layoutX="16.0" layoutY="226.0" text="좋아요수" />
+                        <Label layoutX="73.0" layoutY="226.0" text="싫어요수" />
                      </children>
                   </AnchorPane>
                </children>
@@ -37,14 +42,14 @@
             <VBox prefHeight="182.0" prefWidth="269.0">
                <children>
                   <TextField prefHeight="101.0" prefWidth="269.0" text="내댓글" />
-                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
+                  <HBox prefHeight="94.0" prefWidth="269.0" spacing="10.0" VBox.vgrow="ALWAYS">
                      <children>
                         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="댓글달기" HBox.hgrow="ALWAYS">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="backButton" onAction="#handleBackbtnClicked" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="뒤로가기" HBox.hgrow="ALWAYS">
+                        <Button fx:id="backButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleBackbtnClicked" text="뒤로가기" HBox.hgrow="ALWAYS">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
