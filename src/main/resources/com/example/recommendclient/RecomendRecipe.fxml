@@ -4,16 +4,16 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane fx:id="splitpane" dividerPositions="0.8291457286432161" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="403.0" prefWidth="621.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.recommendclient.RecomendRecipeController">
+<SplitPane fx:id="splitpane" dividerPositions="0.8453865336658354" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="403.0" prefWidth="621.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.recommendclient.RecomendRecipeController">
   <items>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="519.0" prefWidth="833.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="301.0" prefWidth="611.0">
          <children>
 
-            <Label fx:id="wetherrecommend2" contentDisplay="CENTER" layoutX="92.0" layoutY="277.0" text="날씨추천요리2" textAlignment="CENTER" />
-            <Label fx:id="seasonrecommend2" contentDisplay="CENTER" layoutX="362.0" layoutY="277.0" text="계절추천요리2" textAlignment="CENTER" />
-            <Label fx:id="wetherrecommend1" contentDisplay="CENTER" layoutX="93.0" layoutY="118.0" text="날씨추천요리1" textAlignment="CENTER" />
-            <Label fx:id="seasonrecommend1" contentDisplay="CENTER" layoutX="362.0" layoutY="118.0" text="계절추천요리1" textAlignment="CENTER" />
-             <ImageView fx:id="wetherImage2" fitHeight="86.0" fitWidth="152.0" layoutX="101.0" layoutY="182.0" pickOnBounds="true" preserveRatio="false">
+            <Label fx:id="wetherrecommend2" contentDisplay="CENTER" layoutX="137.0" layoutY="280.0" text="날씨추천요리2" textAlignment="CENTER" />
+            <Label fx:id="seasonrecommend2" contentDisplay="CENTER" layoutX="413.0" layoutY="280.0" text="계절추천요리2" textAlignment="CENTER" />
+            <Label fx:id="wetherrecommend1" contentDisplay="CENTER" layoutX="138.0" layoutY="118.0" text="날씨추천요리1" textAlignment="CENTER" />
+            <Label fx:id="seasonrecommend1" contentDisplay="CENTER" layoutX="414.0" layoutY="118.0" text="계절추천요리1" textAlignment="CENTER" />
+             <ImageView fx:id="wetherImage2" fitHeight="86.0" fitWidth="152.0" layoutX="100.0" layoutY="182.0" pickOnBounds="true" preserveRatio="false">
                  <image>
                      <Image url="https://recipe1.ezmember.co.kr/cache/recipe/2022/02/17/1f40ef46386de280a5d80601d0d39ae01.jpg" />
                  </image>
@@ -23,7 +23,7 @@
                      <Image url="https://recipe1.ezmember.co.kr/cache/recipe/2022/04/20/238a7e01e5aa8d135d758f00c4f355e21.jpg" />
                  </image>
              </ImageView>
-            <ImageView fx:id="wetherImage1" fitHeight="86.0" fitWidth="152.0" layoutX="101.0" layoutY="20.0" pickOnBounds="true" preserveRatio="false">
+            <ImageView fx:id="wetherImage1" fitHeight="86.0" fitWidth="152.0" layoutX="106.0" layoutY="20.0" pickOnBounds="true" preserveRatio="false">
              <image>
                  <Image url="https://recipe1.ezmember.co.kr/cache/recipe/2022/02/17/1f40ef46386de280a5d80601d0d39ae01.jpg" />
              </image>
@@ -33,11 +33,14 @@
                     <Image url="https://recipe1.ezmember.co.kr/cache/recipe/2022/02/17/1f40ef46386de280a5d80601d0d39ae01.jpg" />
                 </image>
             </ImageView>
-            <Button fx:id="wetherrecommend1youtubepopup" onAction="#handlewether1YoutubebtnAction" layoutX="144.0" layoutY="143.0" mnemonicParsing="false" text="유튜브영상" />
+            <Button fx:id="wetherrecommend1youtubepopup" layoutX="138.0" layoutY="138.0" mnemonicParsing="false" onAction="#handlewether1YoutubebtnAction" text="유튜브영상1" />
+            <Button layoutX="411.0" layoutY="138.0" mnemonicParsing="false" text="유튜브영상2" />
+            <Button layoutX="141.0" layoutY="300.0" mnemonicParsing="false" text="유튜브영상3" />
+            <Button layoutX="414.0" layoutY="300.0" mnemonicParsing="false" text="유튜브영상4" />
          </children></AnchorPane>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="17.0" prefWidth="619.0">
          <children>
-            <Button fx:id="resetbutton" layoutX="286.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleresetbtnAction" text="새로고침" />
+            <Button fx:id="resetbutton" layoutX="272.0" layoutY="16.0" mnemonicParsing="false" onAction="#handleresetbtnAction" prefHeight="28.0" prefWidth="76.0" text="새로고침" />
          </children></AnchorPane>
   </items>
 </SplitPane>
