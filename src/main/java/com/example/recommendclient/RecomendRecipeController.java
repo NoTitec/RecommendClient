@@ -76,9 +76,11 @@ public class RecomendRecipeController implements Initializable {
     int sendPos = 0;//sendData 인덱싱 변수
     int rcvDataCount;// 수신데이터 개수저장할 변수
 
+    String todayWether=null;
+    String todayTemperature=null;
     String[] recommendname = new String[4];//추천요리 이름저장배열
     String[] Imageurl = new String[4];//추천요리 이미지 url저장배열
-
+    String[] youtubeLink=new String[4];//추천요리 유튜브 링크 저장배열
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         /*initialize메소드는main에서 fxml파일 로드할때 컨트롤객체 생성하며 실행
@@ -207,8 +209,33 @@ public class RecomendRecipeController implements Initializable {
         System.out.println(type);
         int code = buf[1]; //코드
         System.out.println(code);
+
         pos = 2;
-        for (int i = 0; i < 4; i++) {//전송받은 요리 4개 추출해 저장
+        //오늘 날씨
+        int wetherlength=proto.byteArrayToInt(Arrays.copyOfRange(buf, pos, pos + 4));
+        pos+=4;
+        byte[] wethername = Arrays.copyOfRange(buf, pos, pos + wetherlength);
+        try {
+            todayWether=new String(wethername,"UTF-8");
+            System.out.println(todayWether);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        pos+=wetherlength;
+        //온도
+        int temperaturelength=proto.byteArrayToInt(Arrays.copyOfRange(buf, pos, pos + 4));
+        pos+=4;
+        byte[] temperaturevalue = Arrays.copyOfRange(buf, pos, pos + temperaturelength);
+        try {
+            todayTemperature=new String(temperaturevalue,"UTF-8");
+            System.out.println(todayTemperature);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        pos+=temperaturelength;
+
+
+        for (int i = 0; i < 4; i++) {//전송받은 요리 4개와 요리4개의 유튜브 링크 추출해 저장
             //1개요리 이름길이 추출
             int onerecipenamelength = proto.byteArrayToInt(Arrays.copyOfRange(buf, pos, pos + 4));
             pos += 4;
@@ -227,6 +254,14 @@ public class RecomendRecipeController implements Initializable {
             byte[] url = Arrays.copyOfRange(buf, pos, pos + onerecipeurllength);//추출한길이만큼읽어 코드추출
             Imageurl[i] = new String(url);//추출 word를  string으로 변환하여 저장
             pos += onerecipeurllength;
+
+            //1개요리 유튜브 링크 추출
+            int onerecipeyoutubelength = proto.byteArrayToInt(Arrays.copyOfRange(buf, pos, pos + 4));
+            pos += 4;
+            //1개요리 유튜브 url길이만큼 읽어서 추출후 string 변환하여 요리유튜브배열에 저장
+            byte[] youtubeurl = Arrays.copyOfRange(buf, pos, pos + onerecipeyoutubelength);//추출한길이만큼읽어 코드추출
+            youtubeLink[i] = new String(youtubeurl);//추출 word를  string으로 변환하여 저장
+            pos += onerecipeyoutubelength;
         }
 
         //받은 요리의 이름과 이미지 url이용해 ui 정보 변경
@@ -261,9 +296,9 @@ public class RecomendRecipeController implements Initializable {
             @Override
             public void run() {
                 System.out.println("새로고침버튼클릭");
-                //서버에게 요리목록 패킷요청
-                proto= new Protocol(0,0);
-                //proto = new Protocol(TYPE_REQUEST, CODE_RESET_RECOMMENDFOOD); 서버 코드 구현되면 이코드로 변경
+                //서버에게 새로고침요리목록 패킷요청
+                //proto= new Protocol(0,0);
+                proto = new Protocol(TYPE_REQUEST, CODE_RESET_RECOMMENDFOOD);
 
                 try {
                     bos.write(proto.getPacket());
@@ -303,6 +338,13 @@ public class RecomendRecipeController implements Initializable {
                     Imageurl[i] = new String(url);//추출 word를  string으로 변환하여 저장
                     System.out.println(Imageurl[i]);
                     pos += onerecipeurllength;
+                    //1개요리 유튜브 링크 추출
+                    int onerecipeyoutubelength = proto.byteArrayToInt(Arrays.copyOfRange(buf, pos, pos + 4));
+                    pos += 4;
+                    //1개요리 유튜브 url길이만큼 읽어서 추출후 string 변환하여 요리유튜브배열에 저장
+                    byte[] youtubeurl = Arrays.copyOfRange(buf, pos, pos + onerecipeyoutubelength);//추출한길이만큼읽어 코드추출
+                    youtubeLink[i] = new String(youtubeurl);//추출 word를  string으로 변환하여 저장
+                    pos += onerecipeyoutubelength;
                 }
                 //받은 요리의 이름과 이미지 url이용해 ui 정보 변경
                 Platform.runLater(() -> wetherrecommend1.setText(recommendname[0]));
@@ -331,13 +373,13 @@ public class RecomendRecipeController implements Initializable {
         thread.start();
     }
 
-    public void handlewether1YoutubebtnAction(ActionEvent event) {//youtube영상 popup창
+    public void handlewether1YoutubebtnAction(ActionEvent event) {//wetherrecomment1 youtube영상 popup창
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("YoutubeView.fxml"));
             Parent root = (Parent) loader.load();
             YoutubeViewController ycontroller = loader.<YoutubeViewController>getController();
-            ycontroller.initYouData("https://www.youtube.com/embed/N1phCu00GWU");
+            ycontroller.initYouData(youtubeLink[0]);
             Scene scene = new Scene(root);
             Stage ystage = new Stage();
             ystage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -359,10 +401,11 @@ public class RecomendRecipeController implements Initializable {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("SelectRecipeInfo.fxml"));
             Stage stage = new Stage();
+
             Parent selectrecipe = loader.load();
             Scene scene = new Scene(selectrecipe);
             SelectRecipeInfoController sController = loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
-            sController.initData(wetherrecommend1.getText() + "Link");
+            sController.initData(wetherrecommend1.getText());
             stage.setScene(scene);
             stage.showAndWait();
 
@@ -381,7 +424,7 @@ public class RecomendRecipeController implements Initializable {
             Parent selectrecipe = loader.load();
             Scene scene = new Scene(selectrecipe);
             SelectRecipeInfoController sController = loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
-            sController.initData(wetherrecommend2.getText() + "Link");
+            sController.initData(wetherrecommend2.getText());
             stage.setScene(scene);
             stage.showAndWait();
 
@@ -398,7 +441,7 @@ public class RecomendRecipeController implements Initializable {
             Parent selectrecipe = loader.load();
             Scene scene = new Scene(selectrecipe);
             SelectRecipeInfoController sController = loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
-            sController.initData(seasonrecommend1.getText() + "Link");
+            sController.initData(seasonrecommend1.getText());
             stage.setScene(scene);
             stage.showAndWait();
         } catch (Exception e) {
@@ -415,7 +458,7 @@ public class RecomendRecipeController implements Initializable {
             Parent selectrecipe = loader.load();
             Scene scene = new Scene(selectrecipe);
             SelectRecipeInfoController sController = loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
-            sController.initData(seasonrecommend2.getText() + "Link");
+            sController.initData(seasonrecommend2.getText());
             stage.setScene(scene);
             stage.showAndWait();
 
