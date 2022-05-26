@@ -3,8 +3,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<SplitPane fx:id="splitpane" dividerPositions="0.8453865336658354" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="403.0" prefWidth="621.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.recommendclient.RecomendRecipeController">
+<SplitPane fx:id="splitpane" dividerPositions="0.8453865336658354" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="491.0" prefWidth="621.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.recommendclient.RecomendRecipeController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="301.0" prefWidth="611.0">
          <children>
@@ -34,9 +35,19 @@
                 </image>
             </ImageView>
             <Button fx:id="wetherrecommend1youtubepopup" layoutX="138.0" layoutY="138.0" mnemonicParsing="false" onAction="#handlewether1YoutubebtnAction" text="유튜브영상1" />
-            <Button layoutX="411.0" layoutY="138.0" mnemonicParsing="false" text="유튜브영상2" />
-            <Button layoutX="141.0" layoutY="300.0" mnemonicParsing="false" text="유튜브영상3" />
-            <Button layoutX="414.0" layoutY="300.0" mnemonicParsing="false" text="유튜브영상4" />
+            <Button layoutX="411.0" layoutY="138.0" mnemonicParsing="false" text="유튜브영상2" onAction="#handlewether2YoutubebtnAction"/>
+            <Button layoutX="135.0" layoutY="300.0" mnemonicParsing="false" text="유튜브영상3" onAction="#handlewether3YoutubebtnAction"/>
+            <Button layoutX="414.0" layoutY="300.0" mnemonicParsing="false" text="유튜브영상4" onAction="#handlewether4YoutubebtnAction"/>
+            <Label fx:id="wethertext" layoutX="126.0" layoutY="345.0" prefHeight="43.0" prefWidth="126.0" text="Label" textFill="#4e88eb">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="temperaturetext" layoutX="413.0" layoutY="348.0" prefHeight="43.0" prefWidth="118.0" text="Label" textFill="#5795ff">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="17.0" prefWidth="619.0">
          <children>

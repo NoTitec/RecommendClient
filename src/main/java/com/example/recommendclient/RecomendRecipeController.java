@@ -55,6 +55,11 @@ public class RecomendRecipeController implements Initializable {
     @FXML
     public Label seasonrecommend1;
     @FXML
+    public Label wethertext;
+    @FXML
+    public Label temperaturetext;
+
+    @FXML
     public Button wetherrecommend1youtubepopup;
 
     Socket socket;//이컨트롤러가쓸 socket
@@ -217,7 +222,9 @@ public class RecomendRecipeController implements Initializable {
         byte[] wethername = Arrays.copyOfRange(buf, pos, pos + wetherlength);
         try {
             todayWether=new String(wethername,"UTF-8");
-            System.out.println(todayWether);
+
+            wethertext.setText(todayWether);
+
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -228,7 +235,7 @@ public class RecomendRecipeController implements Initializable {
         byte[] temperaturevalue = Arrays.copyOfRange(buf, pos, pos + temperaturelength);
         try {
             todayTemperature=new String(temperaturevalue,"UTF-8");
-            System.out.println(todayTemperature);
+            temperaturetext.setText(todayTemperature + "°C");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -396,6 +403,74 @@ public class RecomendRecipeController implements Initializable {
         }
     }
 
+    public void handlewether2YoutubebtnAction(ActionEvent event) {//wetherrecomment1 youtube영상 popup창
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("YoutubeView.fxml"));
+            Parent root = (Parent) loader.load();
+            YoutubeViewController ycontroller = loader.<YoutubeViewController>getController();
+            ycontroller.initYouData(youtubeLink[1]);
+            Scene scene = new Scene(root);
+            Stage ystage = new Stage();
+            ystage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent event) {
+                    System.out.println("종료");
+                    ycontroller.webEngine.load(null);
+                }
+            });
+            ystage.setScene(scene);
+            ystage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handlewether3YoutubebtnAction(ActionEvent event) {//wetherrecomment1 youtube영상 popup창
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("YoutubeView.fxml"));
+            Parent root = (Parent) loader.load();
+            YoutubeViewController ycontroller = loader.<YoutubeViewController>getController();
+            ycontroller.initYouData(youtubeLink[2]);
+            Scene scene = new Scene(root);
+            Stage ystage = new Stage();
+            ystage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent event) {
+                    System.out.println("종료");
+                    ycontroller.webEngine.load(null);
+                }
+            });
+            ystage.setScene(scene);
+            ystage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handlewether4YoutubebtnAction(ActionEvent event) {//wetherrecomment1 youtube영상 popup창
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("YoutubeView.fxml"));
+            Parent root = (Parent) loader.load();
+            YoutubeViewController ycontroller = loader.<YoutubeViewController>getController();
+            ycontroller.initYouData(youtubeLink[3]);
+            Scene scene = new Scene(root);
+            Stage ystage = new Stage();
+            ystage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent event) {
+                    System.out.println("종료");
+                    ycontroller.webEngine.load(null);
+                }
+            });
+            ystage.setScene(scene);
+            ystage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public void handlerSetWetherImage1Action(MouseEvent event) {//이미지 선택시 선택이미지 창으로 이동
         try {
             FXMLLoader loader = new FXMLLoader();
