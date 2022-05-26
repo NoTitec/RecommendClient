@@ -191,7 +191,7 @@ public class LoginController implements Initializable{
             }else if((int)receiveBuf[0] == TYPE_RESPONSE_ERROR && (int)receiveBuf[1] == CODE_LOGIN){ //로그인을 실패했을 경우 (없는계정)
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setContentText("존재하지 않는 계정입니다. 다시 입력해주세요");
+                alert.setContentText("로그인 실패했습니다. 다시 입력해주세요");
                 alert.show();
                 IDField.clear();
                 PWField.clear();
