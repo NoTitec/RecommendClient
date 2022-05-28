@@ -11,7 +11,7 @@ public class Protocol {
     public static final int CODE_LOGIN = 1;
     public static final int CODE_SIGNUP = 2;
     public static final int CODE_RESET_RECOMMENDFOOD=3;// 최초 code_recommendfood일 때 위도경도보내고 이후 새로고침에는 위도경도를 서버가 저장하므로 이코드로 새로운 요리 요청
-
+    public static final int CODE_DETAIL_FOOD_INFO=4;
     //Protocol Length
     public static final int LEN_PROTOCOL_TYPE = 1;
     public static final int LEN_PROTOCOL_CODE = 1;
@@ -64,6 +64,11 @@ public class Protocol {
                             break;
                     }
 
+                case CODE_DETAIL_FOOD_INFO:
+                    switch (protocolType){
+                        case TYPE_REQUEST:
+                            packet=new byte[LEN_PROTOCOL_TYPE+LEN_PROTOCOL_CODE+LEN_PROTOCOL_BODY];
+                    }
                 case CODE_LOGIN:
 
                     switch (protocolType){
