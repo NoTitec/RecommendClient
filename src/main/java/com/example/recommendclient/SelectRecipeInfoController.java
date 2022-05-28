@@ -48,8 +48,8 @@ public class SelectRecipeInfoController implements Initializable {
     BufferedOutputStream bos;
     BufferedReader reader = null;//문자 수신 스트림
     Protocol proto = new Protocol();//프로토콜 객체 가져옴 ex)
-    byte[] buf;//읽은 패킷 저장할 바이트배열변수
-    int pos = 0;//buf 인덱싱 변수
+    byte[] readBuf;//읽은 패킷 저장할 바이트배열변수
+    int readPos = 0;//buf 인덱싱 변수
     byte[] sendData;//보낼패킷 데이터 저장할 바이트배열변수
     int sendPos = 0;//sendData 인덱싱 변수
     int rcvDataCount;// 수신데이터 개수저장할 변수
@@ -79,11 +79,48 @@ public class SelectRecipeInfoController implements Initializable {
             public void run(){
                 //서버에게 요리이름 전달하여 해당요리의 조리순서,재료목록,댓글 요청
                 proto = new Protocol(TYPE_REQUEST, CODE_DETAIL_FOOD_INFO);
+                byte[] foodNameByte=selectedRecipeName.getBytes();
+                int foodNameByteLength=foodNameByte.length;
+                System.arraycopy(Protocol.intToByteArray(foodNameByteLength),0,sendData,sendPos,4);
+                sendPos+=4;
+                System.arraycopy(foodNameByte,0,sendData,sendPos,foodNameByte.length);
+                proto.setByteData(sendData,sendData.length);
 
+                try {
+                    bos.write(proto.getPacket());
+                    bos.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 //서버한테 정보받기
-
+                readBuf=proto.getPacket(TYPE_RESPONSE,CODE_DETAIL_FOOD_INFO);
+                try {
+                    int availablereadbyte=bis.available();
+                    readBuf = new byte[2 + availablereadbyte];
+                    bis.read(readBuf);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                int type = readBuf[0]; //타입
+                System.out.println(type);
+                int code = readBuf[1]; //코드
+                System.out.println(code);
+                readPos=2;
                 //받은정보들로 컨트롤 set
-                
+
+                //조리순서 추출
+
+                //댓글 목록 추출
+
+                //재료 추출
+
+                //재료 link 추출
+
+                //조리순서 ui set
+
+                //댓글 목록 ui set
+
+                //재료 목록 ui set
             }
         };
         thread.setDaemon(true);
@@ -91,7 +128,19 @@ public class SelectRecipeInfoController implements Initializable {
 
     }
     //_________________________이밑은 핸들러 메소드
+
+    //뒤로가기 버튼
     public void handleBackbtnClicked(ActionEvent event) throws IOException {
         backButton.getScene().getWindow().hide();
     }
+
+    //조리순서 이전 버튼
+
+    //조리순서 다음 버튼
+
+    //재료목록 1개 선택
+
+    //댓글 달기 버튼
+
+
 }
