@@ -1,11 +1,18 @@
 package com.example.recommendclient;
 
+import com.example.recommendclient.dataclass.Ingredient;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -18,6 +25,9 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.Socket;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import static com.example.recommendclient.Protocol.*;
@@ -27,17 +37,23 @@ public class SelectRecipeInfoController implements Initializable {
     @FXML
     private Button Previous;
     @FXML
-    private Label onestep;//조리과정 1개 보여주는 라벨
-    @FXML
     private Button next;
     @FXML
-    private ListView ingredientlistview;
+    private Label onestep;//조리과정 1개 보여주는 라벨
+    @FXML
+    private TableView ingredientTableView;
+    @FXML
+    private TableColumn ingredientNameColumn;
+    @FXML
+    private TableColumn ingredientLinkColumn;
     @FXML
     private Label ingredientLink;
     @FXML
     private ListView commentListview;
     @FXML
     private TextField Mycomment;
+    @FXML
+    private Button leaveComment;
     @FXML
     private Button backButton;
 
@@ -54,6 +70,14 @@ public class SelectRecipeInfoController implements Initializable {
     int sendPos = 0;//sendData 인덱싱 변수
     int rcvDataCount;// 수신데이터 개수저장할 변수
 
+    //조리순서 담을 배열
+    String[] steps;
+    //조리순서 인덱신 추적 변수
+    int stepssize;
+    //댓글 목록 담을 ObservableList
+    ObservableList<String> comments= FXCollections.observableArrayList();
+    //재료+재료링크 담을 리스트
+    ObservableList<Ingredient> ingredientAndLink=FXCollections.observableArrayList();
 
     public void initData(String name){
         selectedRecipeName=name;
@@ -74,6 +98,9 @@ public class SelectRecipeInfoController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        ingredientAndLink.clear();
+
         Thread thread = new Thread(){
             @Override
             public void run(){
@@ -95,7 +122,7 @@ public class SelectRecipeInfoController implements Initializable {
                 //서버한테 정보받기
                 readBuf=proto.getPacket(TYPE_RESPONSE,CODE_DETAIL_FOOD_INFO);
                 try {
-                    int availablereadbyte=bis.available();
+                    int availablereadbyte=bis.available();//읽기가능한 데이터만큼 바이트배열 생성
                     readBuf = new byte[2 + availablereadbyte];
                     bis.read(readBuf);
                 } catch (IOException e) {
@@ -106,21 +133,82 @@ public class SelectRecipeInfoController implements Initializable {
                 int code = readBuf[1]; //코드
                 System.out.println(code);
                 readPos=2;
-                //받은정보들로 컨트롤 set
+                //---------------받은정보들로 컨트롤 set
 
+                //조리 순서 개수 추출
+                int stepCount = Protocol.byteArrayToInt(Arrays.copyOfRange(readBuf, readPos, readPos + 4));
+                readPos+=4;
+                steps = new String[stepCount];
+                stepssize=0;
+                //댓글 개수 추출
+                int commentCount = Protocol.byteArrayToInt(Arrays.copyOfRange(readBuf, readPos, readPos + 4));
+                readPos+=4;
+                comments.clear();
+                //재료 개수 추출
+                int ingredientCount = Protocol.byteArrayToInt(Arrays.copyOfRange(readBuf, readPos, readPos + 4));
+                readPos+=4;
                 //조리순서 추출
-
+                for(int i=0;i<stepCount;i++){
+                    int oneStepLength=Protocol.byteArrayToInt(Arrays.copyOfRange(readBuf,readPos,readPos+4));
+                    readPos+=4;
+                    byte[] oneStepByte=Arrays.copyOfRange(readBuf,readPos,readPos+oneStepLength);
+                    readPos+=oneStepLength;
+                    try{
+                        steps[i]=new String(oneStepByte,"UTF-8");
+                    }catch (UnsupportedEncodingException e){
+                        e.printStackTrace();
+                    }
+                }
                 //댓글 목록 추출
-
-                //재료 추출
-
-                //재료 link 추출
-
+                for(int i=0;i<commentCount;i++){
+                    int oneCommentLength=Protocol.byteArrayToInt(Arrays.copyOfRange(readBuf,readPos,readPos+4));
+                    readPos+=4;
+                    byte[] oneCommentByte = Arrays.copyOfRange(readBuf, readPos, readPos + oneCommentLength);
+                    readPos+=oneCommentLength;
+                    try {
+                        comments.add(new String(oneCommentByte,"UTF-8"));
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                }
+                //재료+link 추출
+                for(int i=0;i<ingredientCount;i++){
+                    int oneIngredientLength=Protocol.byteArrayToInt(Arrays.copyOfRange(readBuf,readPos,readPos+4));
+                    readPos+=4;
+                    byte[] oneIngredientByte=Arrays.copyOfRange(readBuf,readPos,readPos+oneIngredientLength);
+                    readPos+=oneIngredientLength;
+                    int oneIngredientLinkLength=Protocol.byteArrayToInt(Arrays.copyOfRange(readBuf,readPos,readPos+4));
+                    readPos+=4;
+                    byte[] oneIngredientLinkByte=Arrays.copyOfRange(readBuf,readPos,readPos+oneIngredientLinkLength);
+                    String ingredientName="";
+                    String ingredientLink="";
+                    try {
+                        ingredientName=new String(oneIngredientByte, "UTF-8");
+                        ingredientLink=new String(oneIngredientLinkByte, "UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    ingredientAndLink.add(new Ingredient(ingredientName,ingredientLink));
+                }
+                readPos=0;
+                //------------------ui 설정
                 //조리순서 ui set
-
+                Platform.runLater(()->onestep.setText(steps[0]));
                 //댓글 목록 ui set
-
+                Platform.runLater(()->commentListview.setItems(comments));
                 //재료 목록 ui set
+                ingredientNameColumn.setCellValueFactory(new PropertyValueFactory<>("ingredientName"));
+                ingredientLinkColumn.setCellValueFactory(new PropertyValueFactory<>("ingredientLink"));
+                //--재료 클릭시 링크라벨 변경 이벤트 리스너
+                ingredientTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Ingredient>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Ingredient> observable, Ingredient oldValue, Ingredient newValue) {
+                        if(newValue!=null){
+                            Platform.runLater(()->ingredientLink.setText(newValue.getIngredientLink()));
+                        }
+                    }
+                });
+                Platform.runLater(()->ingredientTableView.setItems(ingredientAndLink));
             }
         };
         thread.setDaemon(true);
@@ -135,12 +223,44 @@ public class SelectRecipeInfoController implements Initializable {
     }
 
     //조리순서 이전 버튼
-
+    public void previousbtn(ActionEvent event){
+        if(++stepssize<steps.length) {
+            stepssize++;
+            onestep.setText(steps[stepssize]);
+        }
+        else{
+            System.out.println("end step");
+        }
+    }
     //조리순서 다음 버튼
-
-    //재료목록 1개 선택
-
+    public void nextbtn(ActionEvent event){
+        if(stepssize>0){
+            stepssize--;
+            onestep.setText(steps[stepssize]);
+        }
+        else{
+            System.out.println("first step");
+        }
+    }
     //댓글 달기 버튼
+    public void leavecommentbtn(ActionEvent event){
+        String myComment=Mycomment.getText();
+        //서버에게 내 댓글 전달하여 등록 요청
+        proto = new Protocol(TYPE_REQUEST, CODE_COMMENT_LEAVE);
+        sendPos=0;
+        byte[] commentByte=myComment.getBytes();
+        int foodNameByteLength=commentByte.length;
+        System.arraycopy(Protocol.intToByteArray(foodNameByteLength),0,sendData,sendPos,4);
+        sendPos+=4;
+        System.arraycopy(commentByte,0,sendData,sendPos,commentByte.length);
+        proto.setByteData(sendData,sendData.length);
 
+        try {
+            bos.write(proto.getPacket());
+            bos.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
