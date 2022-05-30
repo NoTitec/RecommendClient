@@ -71,7 +71,7 @@ public class SelectRecipeInfoController implements Initializable {
     int rcvDataCount;// 수신데이터 개수저장할 변수
 
     //조리순서 담을 배열
-    String[] steps;
+    String[] steps=null;
     //조리순서 인덱신 추적 변수
     int stepssize;
     //댓글 목록 담을 ObservableList
@@ -123,7 +123,8 @@ public class SelectRecipeInfoController implements Initializable {
                 //서버한테 정보받기
                 readBuf=proto.getPacket(TYPE_RESPONSE,CODE_DETAIL_FOOD_INFO);
                 try {
-                    int availablereadbyte=bis.available();//읽기가능한 데이터만큼 바이트배열 생성
+                    //int availablereadbyte=bis.available();//읽기가능한 데이터만큼 바이트배열 생성
+                    int availablereadbyte=10000;
                     readBuf = new byte[2 + availablereadbyte];
                     bis.read(readBuf);
                 } catch (IOException e) {
@@ -139,7 +140,10 @@ public class SelectRecipeInfoController implements Initializable {
                 //조리 순서 개수 추출
                 int stepCount = Protocol.byteArrayToInt(Arrays.copyOfRange(readBuf, readPos, readPos + 4));
                 readPos+=4;
-                steps = new String[stepCount];
+                System.out.println("stepCount:"+stepCount);
+                if(stepCount!=0);{
+                    steps = new String[stepCount];
+                }
                 stepssize=0;
                 //댓글 개수 추출
                 int commentCount = Protocol.byteArrayToInt(Arrays.copyOfRange(readBuf, readPos, readPos + 4));
@@ -181,6 +185,7 @@ public class SelectRecipeInfoController implements Initializable {
                     int oneIngredientLinkLength=Protocol.byteArrayToInt(Arrays.copyOfRange(readBuf,readPos,readPos+4));
                     readPos+=4;
                     byte[] oneIngredientLinkByte=Arrays.copyOfRange(readBuf,readPos,readPos+oneIngredientLinkLength);
+                    readPos+=oneIngredientLinkLength;
                     String ingredientName="";
                     String ingredientLink="";
                     try {
@@ -194,7 +199,9 @@ public class SelectRecipeInfoController implements Initializable {
                 readPos=0;
                 //------------------ui 설정
                 //조리순서 ui set
-                Platform.runLater(()->onestep.setText(steps[0]));
+                if(steps!=null) {
+                    Platform.runLater(() -> onestep.setText(steps[0]));
+                }
                 //댓글 목록 ui set
                 Platform.runLater(()->commentListview.setItems(comments));
                 //재료 목록 ui set
@@ -225,22 +232,22 @@ public class SelectRecipeInfoController implements Initializable {
 
     //조리순서 이전 버튼
     public void previousbtn(ActionEvent event){
-        if(++stepssize<steps.length) {
-            stepssize++;
-            onestep.setText(steps[stepssize]);
-        }
-        else{
-            System.out.println("end step");
-        }
-    }
-    //조리순서 다음 버튼
-    public void nextbtn(ActionEvent event){
-        if(stepssize>0){
+        if(stepssize>0) {
             stepssize--;
             onestep.setText(steps[stepssize]);
         }
         else{
-            System.out.println("first step");
+            System.out.println("첫번째 step");
+        }
+    }
+    //조리순서 다음 버튼
+    public void nextbtn(ActionEvent event){
+        if(stepssize+1<steps.length){
+            stepssize++;
+            onestep.setText(steps[stepssize]);
+        }
+        else{
+            System.out.println("마지막 step");
         }
     }
     //댓글 달기 버튼

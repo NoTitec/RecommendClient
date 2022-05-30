@@ -316,7 +316,7 @@ public class RecomendRecipeController implements Initializable {
 
                 //요리목록패킷 받아서 사진과 이미지 변경 , 받는패킷의 목록순서 날씨음식1,2 계절음식 1,2
                 try {
-                    buf = proto.getPacket(1, 0);
+                    buf = proto.getPacket(1, CODE_RESET_RECOMMENDFOOD);
                     System.out.println(bis.read(buf));//수신버퍼 읽기시도후 실제 읽은 바이트수 출력하고 buf배열에 읽은것 저장
                 } catch (IOException e) {
                     e.printStackTrace();

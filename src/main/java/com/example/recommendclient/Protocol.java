@@ -16,7 +16,7 @@ public class Protocol {
     //Protocol Length
     public static final int LEN_PROTOCOL_TYPE = 1;
     public static final int LEN_PROTOCOL_CODE = 1;
-    public static final int LEN_PROTOCOL_BODY = 3000;
+    public static final int LEN_PROTOCOL_BODY = 10000;
 
     // 중요!!! *****헤더에 길이정보를 저장하는 구 방식에서 바디에 길이정보를 같이 저장하는 신 방식으로 변경함.******
     // 헤더에는 TYPE과 CODE만 저장함
@@ -60,6 +60,7 @@ public class Protocol {
                 case CODE_COMMENT_LEAVE:
                 case CODE_DETAIL_FOOD_INFO:
                     switch (protocolType){
+                        case TYPE_RESPONSE:
                         case TYPE_REQUEST:
                             packet=new byte[LEN_PROTOCOL_TYPE+LEN_PROTOCOL_CODE+LEN_PROTOCOL_BODY];
                             break;
