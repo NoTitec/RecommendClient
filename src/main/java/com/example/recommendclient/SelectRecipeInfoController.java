@@ -66,7 +66,7 @@ public class SelectRecipeInfoController implements Initializable {
     Protocol proto = new Protocol();//프로토콜 객체 가져옴 ex)
     byte[] readBuf;//읽은 패킷 저장할 바이트배열변수
     int readPos = 0;//buf 인덱싱 변수
-    byte[] sendData;//보낼패킷 데이터 저장할 바이트배열변수
+    byte[] sendData=new byte[500];//보낼패킷 데이터 저장할 바이트배열변수
     int sendPos = 0;//sendData 인덱싱 변수
     int rcvDataCount;// 수신데이터 개수저장할 변수
 

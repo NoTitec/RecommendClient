@@ -473,6 +473,7 @@ public class RecomendRecipeController implements Initializable {
     }
     public void handlerSetWetherImage1Action(MouseEvent event) {//이미지 선택시 선택이미지 창으로 이동
         try {
+            ProgramInfo.transferFoodName=recommendname[0];
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("SelectRecipeInfo.fxml"));
             Stage stage = new Stage();
@@ -482,7 +483,6 @@ public class RecomendRecipeController implements Initializable {
             SelectRecipeInfoController sController = loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
             //sController.initData(wetherrecommend1.getText());
             //sController.initData(recommendname[0]);
-            ProgramInfo.transferFoodName=recommendname[0];
             stage.setScene(scene);
             stage.showAndWait();
 
@@ -495,6 +495,7 @@ public class RecomendRecipeController implements Initializable {
 
     public void handlerSetWetherImage2Action(MouseEvent event) {
         try {
+            ProgramInfo.transferFoodName=recommendname[1];
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("SelectRecipeInfo.fxml"));
             Stage stage = new Stage();
@@ -503,7 +504,7 @@ public class RecomendRecipeController implements Initializable {
             SelectRecipeInfoController sController = loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
             //sController.initData(wetherrecommend2.getText());
             //sController.initData(recommendname[1]);
-            ProgramInfo.transferFoodName=recommendname[1];
+
             stage.setScene(scene);
             stage.showAndWait();
 
@@ -514,6 +515,7 @@ public class RecomendRecipeController implements Initializable {
 
     public void handlerSetSeasonImage1Action(MouseEvent event) {
         try {
+            ProgramInfo.transferFoodName=recommendname[2];
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("SelectRecipeInfo.fxml"));
             Stage stage = new Stage();
@@ -522,7 +524,6 @@ public class RecomendRecipeController implements Initializable {
             SelectRecipeInfoController sController = loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
             //sController.initData(seasonrecommend1.getText());
             //sController.initData(recommendname[2]);
-            ProgramInfo.transferFoodName=recommendname[2];
             stage.setScene(scene);
             stage.showAndWait();
         } catch (Exception e) {
@@ -532,6 +533,7 @@ public class RecomendRecipeController implements Initializable {
 
     public void handlerSetSeasonImage2Action(MouseEvent event) {
         try {
+            ProgramInfo.transferFoodName=recommendname[3];
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("SelectRecipeInfo.fxml"));
             Stage stage = new Stage();
@@ -541,7 +543,6 @@ public class RecomendRecipeController implements Initializable {
             SelectRecipeInfoController sController = loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
             //sController.initData(seasonrecommend2.getText());
             //sController.initData(recommendname[3]);
-            ProgramInfo.transferFoodName=recommendname[3];
             stage.setScene(scene);
             stage.showAndWait();
 
