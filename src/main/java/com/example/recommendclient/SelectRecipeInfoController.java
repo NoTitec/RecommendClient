@@ -106,6 +106,7 @@ public class SelectRecipeInfoController implements Initializable {
             public void run(){
                 //서버에게 요리이름 전달하여 해당요리의 조리순서,재료목록,댓글 요청
                 proto = new Protocol(TYPE_REQUEST, CODE_DETAIL_FOOD_INFO);
+                selectedRecipeName=ProgramInfo.transferFoodName;
                 byte[] foodNameByte=selectedRecipeName.getBytes();
                 int foodNameByteLength=foodNameByte.length;
                 System.arraycopy(Protocol.intToByteArray(foodNameByteLength),0,sendData,sendPos,4);

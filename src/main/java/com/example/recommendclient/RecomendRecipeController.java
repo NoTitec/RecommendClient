@@ -481,7 +481,7 @@ public class RecomendRecipeController implements Initializable {
             Scene scene = new Scene(selectrecipe);
             SelectRecipeInfoController sController = loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
             //sController.initData(wetherrecommend1.getText());
-            sController.initData(recommendname[0]);
+            //sController.initData(recommendname[0]);
             ProgramInfo.transferFoodName=recommendname[0];
             stage.setScene(scene);
             stage.showAndWait();
@@ -502,7 +502,7 @@ public class RecomendRecipeController implements Initializable {
             Scene scene = new Scene(selectrecipe);
             SelectRecipeInfoController sController = loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
             //sController.initData(wetherrecommend2.getText());
-            sController.initData(recommendname[1]);
+            //sController.initData(recommendname[1]);
             ProgramInfo.transferFoodName=recommendname[1];
             stage.setScene(scene);
             stage.showAndWait();
@@ -521,7 +521,7 @@ public class RecomendRecipeController implements Initializable {
             Scene scene = new Scene(selectrecipe);
             SelectRecipeInfoController sController = loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
             //sController.initData(seasonrecommend1.getText());
-            sController.initData(recommendname[2]);
+            //sController.initData(recommendname[2]);
             ProgramInfo.transferFoodName=recommendname[2];
             stage.setScene(scene);
             stage.showAndWait();
@@ -540,7 +540,7 @@ public class RecomendRecipeController implements Initializable {
             Scene scene = new Scene(selectrecipe);
             SelectRecipeInfoController sController = loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
             //sController.initData(seasonrecommend2.getText());
-            sController.initData(recommendname[3]);
+            //sController.initData(recommendname[3]);
             ProgramInfo.transferFoodName=recommendname[3];
             stage.setScene(scene);
             stage.showAndWait();
