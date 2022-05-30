@@ -13,6 +13,8 @@ public class ProgramInfo {
 
     public static boolean socketConnect=false;//소켓이 할당되어있는지 확인하는 변수
 
+    public static String transferFoodName=null;
+
     public static void setSocket(Socket socket) {
         ProgramInfo.socket = socket;
     }
