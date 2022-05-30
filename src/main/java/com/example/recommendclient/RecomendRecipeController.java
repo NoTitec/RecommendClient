@@ -272,12 +272,16 @@ public class RecomendRecipeController implements Initializable {
         }
 
         //받은 요리의 이름과 이미지 url이용해 ui 정보 변경
+        wetherrecommend1.setWrapText(true);
         wetherrecommend1.setText(recommendname[0]);
         wetherImage1.setImage(new Image(Imageurl[0]));
+        wetherrecommend2.setWrapText(true);
         wetherrecommend2.setText(recommendname[1]);
         wetherImage2.setImage(new Image(Imageurl[1]));
+        seasonrecommend1.setWrapText(true);
         seasonrecommend1.setText(recommendname[2]);
         seasonImage1.setImage(new Image(Imageurl[2]));
+        seasonrecommend2.setWrapText(true);
         seasonrecommend2.setText(recommendname[3]);
         seasonImage2.setImage(new Image(Imageurl[3]));
 

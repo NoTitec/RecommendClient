@@ -200,7 +200,11 @@ public class SelectRecipeInfoController implements Initializable {
                 //------------------ui 설정
                 //조리순서 ui set
                 if(steps!=null) {
-                    Platform.runLater(() -> onestep.setText(steps[0]));
+
+                    Platform.runLater(() -> {
+                        onestep.setWrapText(true);
+                        onestep.setText(steps[0]);
+                    });
                 }
                 //댓글 목록 ui set
                 Platform.runLater(()->commentListview.setItems(comments));
