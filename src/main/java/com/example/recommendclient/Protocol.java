@@ -86,7 +86,7 @@ public class Protocol {
                             break;
 
                         case TYPE_RESPONSE: //응답 (로그인 성공)
-                            packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE + LEN_PROTOCOL_BODY];
+                            packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE];
                             break;
 
                         case TYPE_RESPONSE_ERROR: //응답 (로그인 실패(없는계정))

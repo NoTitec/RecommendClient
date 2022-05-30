@@ -256,6 +256,7 @@ public class SelectRecipeInfoController implements Initializable {
     }
     //댓글 달기 버튼
     public void leavecommentbtn(ActionEvent event){
+        comments.add(Mycomment.getText());
         String myComment=Mycomment.getText();
         //서버에게 내 댓글 전달하여 등록 요청
         proto = new Protocol(TYPE_REQUEST, CODE_COMMENT_LEAVE);
