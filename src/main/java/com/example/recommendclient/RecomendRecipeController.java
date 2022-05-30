@@ -481,7 +481,7 @@ public class RecomendRecipeController implements Initializable {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("SelectRecipeInfo.fxml"));
             Stage stage = new Stage();
-
+            stage.setResizable(false);
             Parent selectrecipe = loader.load();
             Scene scene = new Scene(selectrecipe);
             SelectRecipeInfoController sController = loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
@@ -503,6 +503,7 @@ public class RecomendRecipeController implements Initializable {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("SelectRecipeInfo.fxml"));
             Stage stage = new Stage();
+            stage.setResizable(false);
             Parent selectrecipe = loader.load();
             Scene scene = new Scene(selectrecipe);
             SelectRecipeInfoController sController = loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
@@ -523,6 +524,7 @@ public class RecomendRecipeController implements Initializable {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("SelectRecipeInfo.fxml"));
             Stage stage = new Stage();
+            stage.setResizable(false);
             Parent selectrecipe = loader.load();
             Scene scene = new Scene(selectrecipe);
             SelectRecipeInfoController sController = loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
@@ -541,6 +543,7 @@ public class RecomendRecipeController implements Initializable {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("SelectRecipeInfo.fxml"));
             Stage stage = new Stage();
+            stage.setResizable(false);
             //Stage stage=(Stage)splitpane.getScene().getWindow(); 그냥 빈 new Window 는 wait 와 hide가능한데 특정 fxml 루트컨테이너에 맞춘 stage는 wait메소드호출시 에러
             Parent selectrecipe = loader.load();
             Scene scene = new Scene(selectrecipe);

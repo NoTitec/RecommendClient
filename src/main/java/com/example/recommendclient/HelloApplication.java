@@ -23,6 +23,7 @@ public class HelloApplication extends Application {
                 e.printStackTrace();
             }
         });*/
+        primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         //primaryStage.setWidth(400);//윈도우 크기
         //primaryStage.setHeight(300);
