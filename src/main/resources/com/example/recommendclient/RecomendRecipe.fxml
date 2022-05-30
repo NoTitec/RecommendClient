@@ -11,10 +11,10 @@
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="301.0" prefWidth="611.0">
          <children>
 
-            <Label fx:id="wetherrecommend2" contentDisplay="CENTER" layoutX="137.0" layoutY="280.0" text="날씨추천요리2" textAlignment="CENTER" />
-            <Label fx:id="seasonrecommend2" contentDisplay="CENTER" layoutX="413.0" layoutY="280.0" text="계절추천요리2" textAlignment="CENTER" />
-            <Label fx:id="wetherrecommend1" contentDisplay="CENTER" layoutX="138.0" layoutY="118.0" text="날씨추천요리1" textAlignment="CENTER" />
-            <Label fx:id="seasonrecommend1" contentDisplay="CENTER" layoutX="414.0" layoutY="118.0" text="계절추천요리1" textAlignment="CENTER" />
+            <Label fx:id="wetherrecommend2" contentDisplay="CENTER" layoutX="137.0" layoutY="280.0" prefWidth="90.0" text="날씨추천요리2" textAlignment="CENTER" />
+            <Label fx:id="seasonrecommend2" contentDisplay="CENTER" layoutX="413.0" layoutY="280.0" prefWidth="90.0" text="계절추천요리2" textAlignment="CENTER" />
+            <Label fx:id="wetherrecommend1" contentDisplay="CENTER" layoutX="138.0" layoutY="118.0" prefWidth="90.0" text="날씨추천요리1" textAlignment="CENTER" />
+            <Label fx:id="seasonrecommend1" contentDisplay="CENTER" layoutX="414.0" layoutY="118.0" prefWidth="90.0" text="계절추천요리1" textAlignment="CENTER" />
              <ImageView fx:id="wetherImage2" fitHeight="86.0" fitWidth="152.0" layoutX="100.0" layoutY="182.0" pickOnBounds="true" preserveRatio="false">
                  <image>
                      <Image url="https://recipe1.ezmember.co.kr/cache/recipe/2022/02/17/1f40ef46386de280a5d80601d0d39ae01.jpg" />
