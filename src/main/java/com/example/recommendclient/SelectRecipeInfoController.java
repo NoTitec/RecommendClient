@@ -6,6 +6,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,11 +14,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -229,6 +232,30 @@ public class SelectRecipeInfoController implements Initializable {
     }
     //_________________________이밑은 핸들러 메소드
 
+    //재료링크 클릭 버튼
+    public void ingredientLinkClick(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("IngredientBuyView.fxml"));
+        Parent root = (Parent) loader.load();
+        IngredientBuyController iController=loader.<IngredientBuyController>getController();
+        if(ingredientLink.getText()!=null) {
+            iController.initIngredientData(ingredientLink.getText());
+        }
+        else{
+            System.out.println("링크재료가 현재 null값");
+            return;
+        }
+        Scene scene=new Scene(root);
+        Stage stage=new Stage();
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent windowEvent) {
+                iController.webEngine.load(null);
+            }
+        });
+        stage.setScene(scene);
+        stage.show();
+    }
     //뒤로가기 버튼
     public void handleBackbtnClicked(ActionEvent event) throws IOException {
         backButton.getScene().getWindow().hide();
