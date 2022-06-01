@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.web.*?>
 
-
-<?import javafx.scene.web.WebView?>
-<AnchorPane fx:controller="com.example.recommendclient.IngredientBuyController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="806.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.recommendclient.IngredientBuyController">
     <children>
-        <WebView fx:id="ingredientwebview"></WebView>
+        <WebView fx:id="ingredientwebview" prefHeight="720.0" prefWidth="1280.0" />
     </children>
 
 </AnchorPane>
