@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="signUpAnchorPane" prefHeight="293.0" prefWidth="439.0" style="-fx-background-color: rgba(255, 255, 1, 0.3);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.recommendclient.SignUpController">
+<AnchorPane fx:id="signUpAnchorPane" prefHeight="293.0" prefWidth="439.0" style="-fx-background-color: rgba(255, 255, 1, 0.3);" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.recommendclient.SignUpController">
 
     <GridPane layoutX="110.0" layoutY="117.0" prefHeight="60.0" prefWidth="220.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
         <columnConstraints>

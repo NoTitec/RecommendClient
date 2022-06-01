@@ -1,5 +1,5 @@
 package com.example.recommendclient;
-
+//마지막작동확인 클라이언트프로토콜
 public class Protocol {
     //Type
     public static final int TYPE_REQUEST = 0;
@@ -38,84 +38,84 @@ public class Protocol {
 
     public byte[] getPacket(int protocolType, int protocolCode){//type ,code순으로 보내는데 판단을 왜 코드,타입순으로하는지 모르겠음 가독성 저하
 
-            switch (protocolCode){
+        switch (protocolCode){
 
-                case CODE_RECOMMENDFOOD://code가 추천코드인경우
+            case CODE_RECOMMENDFOOD://code가 추천코드인경우
 
-                    switch (protocolType){
+                switch (protocolType){
 
-                        case TYPE_REQUEST:
-                            packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE + LEN_PROTOCOL_BODY]; // 지금은 위치 정보 안보낸다고 가정
-                            break;
+                    case TYPE_REQUEST:
+                        packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE + LEN_PROTOCOL_BODY]; // 지금은 위치 정보 안보낸다고 가정
+                        break;
 
-                        case TYPE_RESPONSE:
-                            packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE + LEN_PROTOCOL_BODY];
-                            break;
+                    case TYPE_RESPONSE:
+                        packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE + LEN_PROTOCOL_BODY];
+                        break;
 
-                    }
+                }
 
 
-                    break;
+                break;
 
-                case CODE_COMMENT_LEAVE:
-                case CODE_DETAIL_FOOD_INFO:
-                    switch (protocolType){
-                        case TYPE_RESPONSE:
-                        case TYPE_REQUEST:
-                            packet=new byte[LEN_PROTOCOL_TYPE+LEN_PROTOCOL_CODE+LEN_PROTOCOL_BODY];
-                            break;
-                    }
-                    break;
-                case CODE_RESET_RECOMMENDFOOD:// code 가 새로운 추천인경우
+            case CODE_COMMENT_LEAVE:
+            case CODE_DETAIL_FOOD_INFO:
+                switch (protocolType){
+                    case TYPE_RESPONSE:
+                    case TYPE_REQUEST:
+                        packet=new byte[LEN_PROTOCOL_TYPE+LEN_PROTOCOL_CODE+LEN_PROTOCOL_BODY];
+                        break;
+                }
+                break;
+            case CODE_RESET_RECOMMENDFOOD:// code 가 새로운 추천인경우
 
-                    switch (protocolType){
-                        case TYPE_REQUEST:
-                            packet=new byte[LEN_PROTOCOL_TYPE+LEN_PROTOCOL_CODE+LEN_PROTOCOL_BODY];
-                            break;
-                        case TYPE_RESPONSE:
-                            packet=new byte[LEN_PROTOCOL_TYPE+LEN_PROTOCOL_CODE+LEN_PROTOCOL_BODY];
-                            break;
-                    }
-                    break;
-                case CODE_LOGIN:
+                switch (protocolType){
+                    case TYPE_REQUEST:
+                        packet=new byte[LEN_PROTOCOL_TYPE+LEN_PROTOCOL_CODE+LEN_PROTOCOL_BODY];
+                        break;
+                    case TYPE_RESPONSE:
+                        packet=new byte[LEN_PROTOCOL_TYPE+LEN_PROTOCOL_CODE+LEN_PROTOCOL_BODY];
+                        break;
+                }
+                break;
+            case CODE_LOGIN:
 
-                    switch (protocolType){
+                switch (protocolType){
 
-                        case TYPE_REQUEST:
-                            packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE + LEN_PROTOCOL_BODY];
-                            break;
+                    case TYPE_REQUEST:
+                        packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE + LEN_PROTOCOL_BODY];
+                        break;
 
-                        case TYPE_RESPONSE: //응답 (로그인 성공)
-                            packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE];
-                            break;
+                    case TYPE_RESPONSE: //응답 (로그인 성공)
+                        packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE];
+                        break;
 
-                        case TYPE_RESPONSE_ERROR: //응답 (로그인 실패(없는계정))
-                            packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE];
-                            break;
-                    }
+                    case TYPE_RESPONSE_ERROR: //응답 (로그인 실패(없는계정))
+                        packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE];
+                        break;
+                }
 
-                    break;
-                    
-                case CODE_SIGNUP:
-                    
-                    switch (protocolType){
+                break;
 
-                        case TYPE_REQUEST:
-                            packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE + LEN_PROTOCOL_BODY];
-                            break;
+            case CODE_SIGNUP:
 
-                        case TYPE_RESPONSE: //응답 (회원가입 성공)
-                            packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE];
-                            break;
+                switch (protocolType){
 
-                        case TYPE_RESPONSE_ERROR: //응답 (회원가입 실패 (중복아이디 존재))
-                            packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE];
-                            break;
-                            
-                    }
-                    break;
+                    case TYPE_REQUEST:
+                        packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE + LEN_PROTOCOL_BODY];
+                        break;
 
-            }
+                    case TYPE_RESPONSE: //응답 (회원가입 성공)
+                        packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE];
+                        break;
+
+                    case TYPE_RESPONSE_ERROR: //응답 (회원가입 실패 (중복아이디 존재))
+                        packet = new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE];
+                        break;
+
+                }
+                break;
+
+        }
 
 
         packet[0] = (byte)protocolType;
