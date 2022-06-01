@@ -15,6 +15,7 @@ public class ProgramInfo {
 
     public static String transferFoodName=null;
 
+    public static String myId=null;
     public static void setSocket(Socket socket) {
         ProgramInfo.socket = socket;
     }

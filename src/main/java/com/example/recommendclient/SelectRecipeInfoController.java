@@ -247,6 +247,7 @@ public class SelectRecipeInfoController implements Initializable {
         }
         Scene scene=new Scene(root);
         Stage stage=new Stage();
+        stage.setResizable(false);
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent windowEvent) {
@@ -281,9 +282,15 @@ public class SelectRecipeInfoController implements Initializable {
             System.out.println("마지막 step");
         }
     }
+    //댓글 클릭시 기본메시지 삭제 이벤트처리
+    public void textFiledClear(MouseEvent event){
+        Mycomment.clear();
+    }
+
     //댓글 달기 버튼
     public void leavecommentbtn(ActionEvent event){
-        comments.add(Mycomment.getText());
+
+        comments.add(ProgramInfo.myId+ " : " +Mycomment.getText());
         String myComment=Mycomment.getText();
         //서버에게 내 댓글 전달하여 등록 요청
         proto = new Protocol(TYPE_REQUEST, CODE_COMMENT_LEAVE);

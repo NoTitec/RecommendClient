@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.io.*;
 import java.net.InetSocketAddress;
@@ -122,7 +123,9 @@ public class LoginController implements Initializable{
 
                 Parent second = FXMLLoader.load(getClass().getResource("RecomendRecipe.fxml"));
                 Scene scene = new Scene(second);
+
                 Stage stage = (Stage)loginAnchorPane.getScene().getWindow();
+
                 stage.setScene(scene);
 
 
@@ -176,6 +179,8 @@ public class LoginController implements Initializable{
             if((int)receiveBuf[0] == TYPE_RESPONSE && (int)receiveBuf[1] == CODE_LOGIN){ //로그인을 성공했을 경우
 
                 try{
+
+                    ProgramInfo.myId = IDField.getText();
 
                     Parent second = FXMLLoader.load(getClass().getResource("RecomendRecipe.fxml"));
                     Scene scene = new Scene(second);
