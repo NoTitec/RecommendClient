@@ -70,7 +70,7 @@ public class Protocol {
 
                     switch (protocolType){
                         case TYPE_REQUEST:
-                            packet=new byte[LEN_PROTOCOL_TYPE + LEN_PROTOCOL_CODE];
+                            packet=new byte[LEN_PROTOCOL_TYPE+LEN_PROTOCOL_CODE+LEN_PROTOCOL_BODY];
                             break;
                         case TYPE_RESPONSE:
                             packet=new byte[LEN_PROTOCOL_TYPE+LEN_PROTOCOL_CODE+LEN_PROTOCOL_BODY];
