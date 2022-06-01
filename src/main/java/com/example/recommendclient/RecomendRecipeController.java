@@ -31,7 +31,7 @@ import java.util.ResourceBundle;
 
 import static com.example.recommendclient.Protocol.*; //상수 사용을 위한 import
 
-
+//요리컨트롤러
 public class RecomendRecipeController implements Initializable {
     //@FXML다음 initialize실행
     @FXML
@@ -111,7 +111,7 @@ public class RecomendRecipeController implements Initializable {
         if (!ProgramInfo.socketConnect) {//소켓이 아직 연결안되어있으면 소켓 연결
             final String server_Ip = "127.0.0.1";//루프백 주소 후에 실제 인터넷연결시 이걸 변경
 
-            final int server_port = 3000;//서버가 포트3000으로 서버소켓 만듬
+            final int server_port = 3010;//서버가 포트3000으로 서버소켓 만듬
             socket = new Socket();
 
             try {
@@ -484,9 +484,13 @@ public class RecomendRecipeController implements Initializable {
             stage.setResizable(false);
             Parent selectrecipe = loader.load();
             Scene scene = new Scene(selectrecipe);
-            SelectRecipeInfoController sController = loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
+            //SelectRecipeInfoController sController = loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
+
+
+
             //sController.initData(wetherrecommend1.getText());
             //sController.initData(recommendname[0]);
+
             stage.setScene(scene);
             stage.showAndWait();
 
@@ -506,7 +510,7 @@ public class RecomendRecipeController implements Initializable {
             stage.setResizable(false);
             Parent selectrecipe = loader.load();
             Scene scene = new Scene(selectrecipe);
-            SelectRecipeInfoController sController = loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
+            //SelectRecipeInfoController sController = loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
             //sController.initData(wetherrecommend2.getText());
             //sController.initData(recommendname[1]);
 

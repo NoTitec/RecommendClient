@@ -34,7 +34,7 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import static com.example.recommendclient.Protocol.*;
-
+//상세페이지 컨트롤러
 public class SelectRecipeInfoController implements Initializable {
     private String selectedRecipeName;
     @FXML
@@ -203,7 +203,8 @@ public class SelectRecipeInfoController implements Initializable {
                 //------------------ui 설정
                 //조리순서 ui set
                 if(steps!=null) {
-
+                    System.out.println(steps[0]);
+                    System.out.println(readBuf.length);
                     Platform.runLater(() -> {
                         onestep.setWrapText(true);
                         onestep.setText(steps[0]);
@@ -259,7 +260,8 @@ public class SelectRecipeInfoController implements Initializable {
     }
     //뒤로가기 버튼
     public void handleBackbtnClicked(ActionEvent event) throws IOException {
-        backButton.getScene().getWindow().hide();
+        Stage stage=(Stage) backButton.getScene().getWindow();
+        Platform.runLater(()-> stage.close());
     }
 
     //조리순서 이전 버튼
@@ -305,6 +307,7 @@ public class SelectRecipeInfoController implements Initializable {
         try {
             bos.write(proto.getPacket());
             bos.flush();
+            System.out.println("서버에게 내 댓글 전송");
         } catch (IOException e) {
             e.printStackTrace();
         }
