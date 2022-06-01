@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 public class IngredientBuyController implements Initializable {
     public String ingredientLink;
     @FXML
-    private WebView ingredientview;
+    private WebView ingredientwebview;
     public WebEngine webEngine;
     public void initIngredientData(String name){ ingredientLink=name;}
     @Override
@@ -20,7 +20,7 @@ public class IngredientBuyController implements Initializable {
         Platform.runLater(()->{//init 가 initialize보다 먼저실행되므로 runlater로  init받고 웹뷰동작하게
             System.out.println(ingredientLink);
             String geturl=ingredientLink;
-            webEngine=ingredientview.getEngine();
+            webEngine=ingredientwebview.getEngine();
             webEngine.load(geturl);
         });
     }
