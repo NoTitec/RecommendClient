@@ -15,7 +15,7 @@ public class HelloApplication extends Application {
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Login.fxml")); //시작화면 변경
         Scene scene = new Scene(fxmlLoader.load());//, 320, 240 fxmlLoader 에서 크기지정가능
-        primaryStage.setTitle("Hello!");
+        primaryStage.setTitle("현재 위치 날씨 추천 요리 프로그램");
         /*primaryStage.setOnCloseRequest(event -> {
             try {
                 ProgramInfo.closeSocket();

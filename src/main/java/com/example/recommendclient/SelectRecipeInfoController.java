@@ -28,6 +28,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.Socket;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -110,7 +111,7 @@ public class SelectRecipeInfoController implements Initializable {
                 //서버에게 요리이름 전달하여 해당요리의 조리순서,재료목록,댓글 요청
                 proto = new Protocol(TYPE_REQUEST, CODE_DETAIL_FOOD_INFO);
                 selectedRecipeName=ProgramInfo.transferFoodName;
-                byte[] foodNameByte=selectedRecipeName.getBytes();
+                byte[] foodNameByte=selectedRecipeName.getBytes(StandardCharsets.UTF_8);
                 int foodNameByteLength=foodNameByte.length;
                 System.arraycopy(Protocol.intToByteArray(foodNameByteLength),0,sendData,sendPos,4);
                 sendPos+=4;
@@ -220,6 +221,7 @@ public class SelectRecipeInfoController implements Initializable {
                     @Override
                     public void changed(ObservableValue<? extends Ingredient> observable, Ingredient oldValue, Ingredient newValue) {
                         if(newValue!=null){
+                            Platform.runLater(()->ingredientLink.setWrapText(true));
                             Platform.runLater(()->ingredientLink.setText(newValue.getIngredientLink()));
                         }
                     }

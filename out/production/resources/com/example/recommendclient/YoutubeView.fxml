@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.*?>
-
-
-<?import javafx.scene.web.WebView?>
-<AnchorPane fx:controller="com.example.recommendclient.YoutubeViewController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="806.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.web.*?>
+<?import javafx.stage.Screen?>
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.width}" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.recommendclient.YoutubeViewController">
+    <fx:define>
+        <Screen fx:factory="getPrimary" fx:id="screen"/>
+    </fx:define>
     <children>
-        <WebView fx:id="youtubeembedview"></WebView>
+        <WebView fx:id="youtubeembedview" maxHeight="3000.0" maxWidth="4000.0" minHeight="-1.0" minWidth="-1.0" prefHeight="1000" prefWidth="1500" />
     </children>
 
 </AnchorPane>

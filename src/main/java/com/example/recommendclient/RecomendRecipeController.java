@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,6 +15,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import org.json.JSONArray;
@@ -111,7 +113,7 @@ public class RecomendRecipeController implements Initializable {
         if (!ProgramInfo.socketConnect) {//소켓이 아직 연결안되어있으면 소켓 연결
             final String server_Ip = "127.0.0.1";//루프백 주소 후에 실제 인터넷연결시 이걸 변경
 
-            final int server_port = 3010;//서버가 포트3000으로 서버소켓 만듬
+            final int server_port = 3000;//서버가 포트3000으로 서버소켓 만듬
             socket = new Socket();
 
             try {
@@ -391,8 +393,10 @@ public class RecomendRecipeController implements Initializable {
             Parent root = (Parent) loader.load();
             YoutubeViewController ycontroller = loader.<YoutubeViewController>getController();
             ycontroller.initYouData(youtubeLink[0]);
-            Scene scene = new Scene(root);
+            //Rectangle2D primScreenBounds= Screen.getPrimary().getVisualBounds();
+            Scene scene = new Scene(root,1500,1000);
             Stage ystage = new Stage();
+            ystage.setResizable(false);
             ystage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 @Override
                 public void handle(WindowEvent event) {
@@ -414,8 +418,9 @@ public class RecomendRecipeController implements Initializable {
             Parent root = (Parent) loader.load();
             YoutubeViewController ycontroller = loader.<YoutubeViewController>getController();
             ycontroller.initYouData(youtubeLink[1]);
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root,1500,1000);
             Stage ystage = new Stage();
+            ystage.setResizable(false);
             ystage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 @Override
                 public void handle(WindowEvent event) {
@@ -437,8 +442,9 @@ public class RecomendRecipeController implements Initializable {
             Parent root = (Parent) loader.load();
             YoutubeViewController ycontroller = loader.<YoutubeViewController>getController();
             ycontroller.initYouData(youtubeLink[2]);
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root,1500,1000);
             Stage ystage = new Stage();
+            ystage.setResizable(false);
             ystage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 @Override
                 public void handle(WindowEvent event) {
@@ -460,8 +466,9 @@ public class RecomendRecipeController implements Initializable {
             Parent root = (Parent) loader.load();
             YoutubeViewController ycontroller = loader.<YoutubeViewController>getController();
             ycontroller.initYouData(youtubeLink[3]);
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root,1500,1000);
             Stage ystage = new Stage();
+            ystage.setResizable(false);
             ystage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 @Override
                 public void handle(WindowEvent event) {
@@ -480,19 +487,15 @@ public class RecomendRecipeController implements Initializable {
             ProgramInfo.transferFoodName=recommendname[0];
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("SelectRecipeInfo.fxml"));
+            Parent root=(Parent) loader.load();
+            Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setResizable(false);
-            Parent selectrecipe = loader.load();
-            Scene scene = new Scene(selectrecipe);
+            stage.setScene(scene);
+            stage.show();
             //SelectRecipeInfoController sController = loader.getController();//선택요리정보 넘겨주기위해 컨트롤러 가져와 초기화
-
-
-
             //sController.initData(wetherrecommend1.getText());
             //sController.initData(recommendname[0]);
-
-            stage.setScene(scene);
-            stage.showAndWait();
 
 
         } catch (Exception e) {

@@ -1,58 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<SplitPane fx:id="splitpane" dividerPositions="0.8453865336658354" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="559.0" prefWidth="621.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.recommendclient.RecomendRecipeController">
+<SplitPane fx:id="splitpane" dividerPositions="0.8453865336658354" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="772.0" prefWidth="621.0" style="-fx-background-color: rgba(255, 255, 1, 0.3);;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.recommendclient.RecomendRecipeController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="301.0" prefWidth="611.0">
          <children>
 
-            <Label fx:id="wetherrecommend2" contentDisplay="CENTER" layoutX="107.0" layoutY="295.0" maxHeight="45.0" prefWidth="150.0" text="날씨추천요리2" textAlignment="CENTER" />
-            <Label fx:id="seasonrecommend2" contentDisplay="CENTER" layoutX="377.0" layoutY="295.0" maxHeight="45.0" prefWidth="150.0" text="계절추천요리2" textAlignment="CENTER" />
-            <Label fx:id="wetherrecommend1" alignment="CENTER" contentDisplay="CENTER" layoutX="114.0" layoutY="118.0" maxHeight="15.0" prefWidth="150.0" text="날씨추천요리1" textAlignment="CENTER" />
-            <Label fx:id="seasonrecommend1" contentDisplay="CENTER" layoutX="370.0" layoutY="118.0" maxHeight="45.0" prefWidth="150.0" text="계절추천요리1" textAlignment="CENTER" />
-             <ImageView fx:id="wetherImage2" fitHeight="86.0" fitWidth="152.0" layoutX="106.0" layoutY="202.0" pickOnBounds="true" preserveRatio="false">
+            <Label fx:id="wetherrecommend2" alignment="CENTER" contentDisplay="CENTER" layoutX="84.0" layoutY="309.0" maxHeight="45.0" prefWidth="150.0" text="날씨추천요리2" textAlignment="CENTER" />
+            <Label fx:id="seasonrecommend2" alignment="CENTER" contentDisplay="CENTER" layoutX="371.0" layoutY="309.0" maxHeight="45.0" prefWidth="150.0" text="계절추천요리2" textAlignment="CENTER" />
+            <Label fx:id="wetherrecommend1" alignment="CENTER" contentDisplay="CENTER" layoutX="84.0" layoutY="125.0" maxHeight="15.0" prefWidth="150.0" text="날씨추천요리1" textAlignment="CENTER" />
+            <Label fx:id="seasonrecommend1" alignment="CENTER" contentDisplay="CENTER" layoutX="371.0" layoutY="125.0" maxHeight="45.0" prefWidth="150.0" text="계절추천요리1" textAlignment="CENTER" />
+             <ImageView fx:id="wetherImage2" fitHeight="86.0" fitWidth="152.0" layoutX="83.0" layoutY="213.0" pickOnBounds="true" preserveRatio="false">
                  <image>
                      <Image url="https://recipe1.ezmember.co.kr/cache/recipe/2022/02/17/1f40ef46386de280a5d80601d0d39ae01.jpg" />
                  </image>
              </ImageView>
-             <ImageView fx:id="seasonImage2" fitHeight="86.0" fitWidth="152.0" layoutX="369.0" layoutY="202.0" pickOnBounds="true" preserveRatio="false">
+             <ImageView fx:id="seasonImage2" fitHeight="86.0" fitWidth="152.0" layoutX="370.0" layoutY="216.0" pickOnBounds="true" preserveRatio="false">
                  <image>
                      <Image url="https://recipe1.ezmember.co.kr/cache/recipe/2022/04/20/238a7e01e5aa8d135d758f00c4f355e21.jpg" />
                  </image>
              </ImageView>
-            <ImageView fx:id="wetherImage1" fitHeight="86.0" fitWidth="152.0" layoutX="113.0" layoutY="20.0" pickOnBounds="true" preserveRatio="false">
+            <ImageView fx:id="wetherImage1" fitHeight="86.0" fitWidth="152.0" layoutX="83.0" layoutY="32.0" pickOnBounds="true" preserveRatio="false">
              <image>
                  <Image url="https://recipe1.ezmember.co.kr/cache/recipe/2022/02/17/1f40ef46386de280a5d80601d0d39ae01.jpg" />
              </image>
              </ImageView>
-            <ImageView fx:id="seasonImage1" fitHeight="86.0" fitWidth="152.0" layoutX="369.0" layoutY="20.0" pickOnBounds="true" preserveRatio="false">
+            <ImageView fx:id="seasonImage1" fitHeight="86.0" fitWidth="152.0" layoutX="370.0" layoutY="32.0" pickOnBounds="true" preserveRatio="false">
                 <image>
                     <Image url="https://recipe1.ezmember.co.kr/cache/recipe/2022/02/17/1f40ef46386de280a5d80601d0d39ae01.jpg" />
                 </image>
             </ImageView>
-            <Button fx:id="wetherrecommend1youtubepopup" layoutX="147.0" layoutY="171.0" mnemonicParsing="false" onAction="#handlewether1YoutubebtnAction" text="유튜브영상1" />
-            <Button layoutX="134.0" layoutY="344.0" mnemonicParsing="false" onAction="#handlewether2YoutubebtnAction" text="유튜브영상3" />
-            <Button layoutX="403.0" layoutY="171.0" mnemonicParsing="false" onAction="#handlewether3YoutubebtnAction" text="유튜브영상2" />
-            <Button layoutX="403.0" layoutY="344.0" mnemonicParsing="false" onAction="#handlewether4YoutubebtnAction" text="유튜브영상4" />
-            <Label fx:id="wethertext" layoutX="126.0" layoutY="400.0" prefHeight="43.0" prefWidth="126.0" text="Label" textFill="#4e88eb">
+            <Button fx:id="wetherrecommend1youtubepopup" layoutX="119.0" layoutY="182.0" mnemonicParsing="false" onAction="#handlewether1YoutubebtnAction" text="유튜브영상1" />
+            <Button layoutX="118.0" layoutY="366.0" mnemonicParsing="false" onAction="#handlewether2YoutubebtnAction" text="유튜브영상3" />
+            <Button layoutX="405.0" layoutY="182.0" mnemonicParsing="false" onAction="#handlewether3YoutubebtnAction" text="유튜브영상2" />
+            <Button layoutX="404.0" layoutY="366.0" mnemonicParsing="false" onAction="#handlewether4YoutubebtnAction" text="유튜브영상4" />
+            <Label fx:id="wethertext" layoutX="224.0" layoutY="559.0" prefHeight="43.0" prefWidth="126.0" text="Label" textFill="#ff9200">
                <font>
                   <Font size="36.0" />
                </font>
             </Label>
-            <Label fx:id="temperaturetext" layoutX="414.0" layoutY="400.0" prefHeight="43.0" prefWidth="118.0" text="Label" textFill="#5795ff">
+            <Label fx:id="temperaturetext" layoutX="405.0" layoutY="559.0" prefHeight="43.0" prefWidth="118.0" text="Label" textFill="#ff9559">
                <font>
                   <Font size="36.0" />
+               </font>
+            </Label>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="494.0" layoutX="344.0" layoutY="18.0" stroke="BLACK" strokeType="INSIDE" width="12.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="500.0" layoutX="544.0" layoutY="15.0" stroke="BLACK" strokeType="INSIDE" width="12.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff3b1f" height="494.0" layoutX="56.0" layoutY="16.0" stroke="BLACK" strokeType="INSIDE" width="12.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="500.0" layoutX="254.0" layoutY="12.0" stroke="BLACK" strokeType="INSIDE" width="12.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff401f" height="14.0" layoutX="56.0" layoutY="7.0" stroke="BLACK" strokeType="INSIDE" width="212.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" layoutX="344.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="212.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" layoutX="344.0" layoutY="500.0" stroke="BLACK" strokeType="INSIDE" width="212.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff281f" height="14.0" layoutX="59.0" layoutY="500.0" stroke="BLACK" strokeType="INSIDE" width="206.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="446.0" prefHeight="35.0" prefWidth="224.0" text="날씨 추천 요리" textFill="#ff3b3b">
+                <font>
+                    <Font name="System Bold" size="25.0" />
+                </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="359.0" layoutY="446.0" prefHeight="35.0" prefWidth="184.0" text="계절 추천 요리" textFill="#6169ff">
+                <font>
+                    <Font name="System Bold" size="25.0">
+                    </Font>
+                </font>
+            </Label>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#59ff1f" height="14.0" layoutX="35.0" layoutY="528.0" stroke="BLACK" strokeType="INSIDE" width="534.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5eff1f" height="14.0" layoutX="35.0" layoutY="620.0" stroke="BLACK" strokeType="INSIDE" width="534.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#50ff1f" height="105.0" layoutX="556.0" layoutY="528.0" stroke="BLACK" strokeType="INSIDE" width="19.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7bff1f" height="105.0" layoutX="34.0" layoutY="530.0" stroke="BLACK" strokeType="INSIDE" width="19.0" />
+            <Label layoutX="68.0" layoutY="556.0" prefHeight="53.0" prefWidth="110.0" text="현재 날씨" textFill="#403020">
+               <font>
+                  <Font size="25.0" />
                </font>
             </Label>
          </children></AnchorPane>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="17.0" prefWidth="619.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="619.0">
          <children>
-            <Button fx:id="resetbutton" layoutX="272.0" layoutY="16.0" mnemonicParsing="false" onAction="#handleresetbtnAction" prefHeight="28.0" prefWidth="76.0" text="새로고침" />
+            <Button fx:id="resetbutton" layoutX="272.0" layoutY="37.0" mnemonicParsing="false" onAction="#handleresetbtnAction" prefHeight="28.0" prefWidth="76.0" text="새로고침" />
          </children></AnchorPane>
   </items>
 </SplitPane>

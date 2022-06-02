@@ -48,8 +48,8 @@ public class LoginController implements Initializable{
         loginButton.setOnAction(event -> handlerSetLoginbtnAction(event));
         //소켓생성
         if(!ProgramInfo.socketConnect){//소켓이 아직 연결안되어있으면 소켓 연결
-            final String server_Ip="192.168.229.66";//루프백 주소 후에 실제 인터넷연결시 이걸 변경
-
+            //final String server_Ip="192.168.229.66";//루프백 주소 후에 실제 인터넷연결시 이걸 변경
+            final String server_Ip="127.0.0.1";
             final int server_port=3000;//서버가 포트3000으로 서버소켓 만듬
             socket = new Socket();
 

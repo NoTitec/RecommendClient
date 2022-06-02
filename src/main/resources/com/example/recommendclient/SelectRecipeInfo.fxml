@@ -30,7 +30,7 @@
                       <TableColumn fx:id="ingredientLinkColumn" prefWidth="160.0" text="재료 구매 링크" />
                     </columns>
                   </TableView>
-                  <Label fx:id="ingredientLink" onMouseClicked="#ingredientLinkClick" prefHeight="14.0" prefWidth="295.0" text="재료링크">
+                  <Label fx:id="ingredientLink" onMouseClicked="#ingredientLinkClick" prefHeight="57.0" prefWidth="295.0" text="재료링크">
                      <VBox.margin>
                         <Insets left="10.0" />
                      </VBox.margin></Label>
